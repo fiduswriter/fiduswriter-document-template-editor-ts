@@ -110,10 +110,10 @@ export class DocumentTemplateDesigner {
       staticUrl("css/prosemirror-menu.css"),
       staticUrl("css/prosemirror-example-setup.css"),
       staticUrl("css/document_template_designer.css"),
-      staticUrl("css/tags.css"),
-      staticUrl("css/contributors.css"),
+      staticUrl("css/editor/tags.css"),
+      staticUrl("css/editor/contributors.css"),
       staticUrl("css/dialog.css"),
-      staticUrl("css/table.css"),
+      staticUrl("css/editor/table.css"),
       staticUrl("css/dialog_table.css"),
     ]);
     this.setupInitialEditors();

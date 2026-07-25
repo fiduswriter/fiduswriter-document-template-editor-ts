@@ -232,8 +232,7 @@ export class ExportTemplateDialog {
       errors.push(
         gettext("You need to upload a template file in ODT or DOCX format."),
       );
-    }
-    if (
+    } else if (
       this.allTemplates.find(
         (template) =>
           template.fields.title ===
