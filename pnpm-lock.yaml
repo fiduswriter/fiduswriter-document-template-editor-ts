@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fiduswriter/document':
-        specifier: ^0.2.30
-        version: 0.2.30
+        specifier: ^0.2.32
+        version: 0.2.32
       downloadjs:
         specifier: ^1.4.7
         version: 1.4.7
@@ -18,8 +18,8 @@ importers:
         specifier: ^3.1.3
         version: 3.1.3
       fwtoolkit:
-        specifier: ^0.2.3
-        version: 0.2.3(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+        specifier: ^0.2.4
+        version: 0.2.4(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
@@ -326,8 +326,8 @@ packages:
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fiduswriter/document@0.2.30':
-    resolution: {integrity: sha512-raQ6Fro0awVczOeFkolSH0WsOEDZUjGZ61Fc8Wd/FWmxJ9QC2MRDhaIcCs1/Y2iYhf8szorRsanR77rWi0hduQ==}
+  '@fiduswriter/document@0.2.32':
+    resolution: {integrity: sha512-2g3okC3qYLBT1dzqoceFthVvOEXFv4yZ/BRaUXLwA8tEGKO+u1xJ90fx+wn/UD0EtCCVTPvNIVjNpxwMm8umHQ==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1167,8 +1167,8 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  fwtoolkit@0.2.3:
-    resolution: {integrity: sha512-cuwom2YjYDh4nVrskYh+IXsDIwRB7eGzI2ouelK0tuSUqTpIIThXkN9jwJxFXE/r/BljMko1oojxOz6y9V1f3g==}
+  fwtoolkit@0.2.4:
+    resolution: {integrity: sha512-xSv6ODIAyYmWxQF+HFIcN+knW9C5mSlNrge+O21PpHzC/QFyWtJaNurYiu0DfLOYgGLzC3EtMkOrgI8tMsRUog==}
     peerDependencies:
       prosemirror-commands: ^1.7.0
       prosemirror-history: ^1.4.0
@@ -2397,7 +2397,7 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fiduswriter/document@0.2.30':
+  '@fiduswriter/document@0.2.32':
     dependencies:
       '@prettier/plugin-xml': 3.4.2(prettier@3.9.6)
       '@vivliostyle/print': 2.44.1
@@ -2406,7 +2406,7 @@ snapshots:
       downloadjs: 1.4.7
       fast-deep-equal: 3.1.3
       fast-xml-parser: 5.10.1
-      fwtoolkit: 0.2.3(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.4(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip: 3.10.1
       mathlive: 0.104.2
       mathml-to-latex: 1.8.0
@@ -3352,7 +3352,7 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  fwtoolkit@0.2.3(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
+  fwtoolkit@0.2.4(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
     dependencies:
       diff-dom: 5.2.1
       jszip: 3.10.1
