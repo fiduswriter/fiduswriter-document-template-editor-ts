@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://codeberg.org/fiduswriter/fiduswriter-document-template-editor-js/raw/branch/main/logo.svg" alt="@fiduswriter/document-template-editor" width="100" height="100">
+  <img src="https://codeberg.org/fiduswriter/fiduswriter-document-template-editor-ts/raw/branch/main/logo.svg" alt="@fiduswriter/document-template-editor" width="100" height="100">
 </p>
 
 <h1 align="center">@fiduswriter/document-template-editor</h1>
