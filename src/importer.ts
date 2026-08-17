@@ -134,7 +134,8 @@ export class DocumentTemplateImporter {
         (file) => file.filename === "mimetype",
       )!.contents;
     if (
-      mimeType === "application/fidustemplate+zip" &&
+      (mimeType === "application/fidustemplate+zip" ||
+        mimeType === "application/vnd.fiduswriter.template+zip") &&
       filetypeVersion >= MIN_FW_DOCUMENT_VERSION &&
       filetypeVersion <= MAX_FW_DOCUMENT_VERSION
     ) {
