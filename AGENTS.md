@@ -9,7 +9,7 @@ documents to conform to templates, and template import/export.
 
 - Package name: `@fiduswriter/document-template-editor`
 - License: `AGPL-3.0`
-- Repository: `https://codeberg.org/fiduswriter/fiduswriter-document-template-editor.git`
+- Repository: `https://git.fiduswriter.org/fiduswriter/fiduswriter-document-template-editor-ts.git`
 - Author: Johannes Wilm
 
 ## Scope
