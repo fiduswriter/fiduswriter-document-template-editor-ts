@@ -75,7 +75,7 @@ export class DocumentTemplateDesigner {
     dom: HTMLElement,
     documentTemplateApi: DocumentTemplateApi,
   ) {
-    ensureCSS(staticUrl("css/input_list.css"));
+    ensureCSS(staticUrl("css/fwtoolkit/input_list.css"));
     this.id = id;
     this.title = title;
     this.value = toFullJSON(
@@ -104,17 +104,17 @@ export class DocumentTemplateDesigner {
       citationStyles: this.citationStyles,
     });
     ensureCSS([
-      staticUrl("css/common.css"),
-      staticUrl("css/dialog.css"),
+      staticUrl("css/fwtoolkit/common.css"),
+      staticUrl("css/fwtoolkit/dialog.css"),
       staticUrl("css/prosemirror.css"),
       staticUrl("css/prosemirror-menu.css"),
       staticUrl("css/prosemirror-example-setup.css"),
       staticUrl("css/document_template_designer.css"),
       staticUrl("css/editor/tags.css"),
       staticUrl("css/editor/contributors.css"),
-      staticUrl("css/dialog.css"),
+      staticUrl("css/fwtoolkit/dialog.css"),
       staticUrl("css/editor/table.css"),
-      staticUrl("css/dialog_table.css"),
+      staticUrl("css/fwtoolkit/dialog_table.css"),
     ]);
     this.setupInitialEditors();
     this.bind();

@@ -57,8 +57,8 @@ export class DocumentTemplateAdmin {
       staticUrl("css/colors.css"),
       staticUrl("css/document_template_admin.css"),
       staticUrl("css/admin.css"),
-      staticUrl("css/dialog.css"),
-      staticUrl("css/buttons.css"),
+      staticUrl("css/fwtoolkit/dialog.css"),
+      staticUrl("css/fwtoolkit/buttons.css"),
     ]);
     const csl = new CSL();
     const initialTasks: Array<Promise<unknown>> = [
