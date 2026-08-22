@@ -83,10 +83,10 @@ The package must remain backend-agnostic. It does **not** contain any
 hard-coded `/api/...` URLs. All server communication goes through the
 injected `DocumentTemplateApi` connector defined in `src/types.ts`.
 
-The host app (e.g. `fiduswriter/`) creates an implementation of this
-interface and passes it to the admin/dialog/exporter/importer classes.
+The host app (e.g. `fiduswriter-server-backend/`) creates an implementation of
+this interface and passes it to the admin/dialog/exporter/importer classes.
 The Django implementation lives in
-`fiduswriter/fiduswriter/base/static/js/modules/api_adapters/index.js`.
+`fiduswriter-server-backend/fiduswriter/base/static/js/modules/api_adapters/index.js`.
 
 When adding a new backend operation:
 
@@ -99,5 +99,5 @@ When adding a new backend operation:
 
 ## Consumers
 
-- `fiduswriter/` (the main Fidus Writer Django app).
+- `fiduswriter-server-backend/` (the main Fidus Writer Django app).
 - `@fiduswriter/document` for the document model.
