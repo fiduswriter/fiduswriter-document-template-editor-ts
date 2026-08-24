@@ -1,3 +1,18 @@
+/* Default part colors. Hosts with a full color scheme (the Fidus Writer
+   frontend/Django apps define these in their colors.css) override them;
+   standalone embeds get the canonical scheme so the drag & drop palette
+   stays readable. */
+:root {
+  --part-neutral-background-color: #f0f8ff;
+  --part-neutral-border-color: #000000;
+  --part-heading-background-color: #84c4fe;
+  --part-contributors-background-color: #928efe;
+  --part-richtext-background-color: #ffc87b;
+  --part-tags-background-color: #ffdf7b;
+  --part-table-background-color: #bfedc1;
+  --part-toc-background-color: #985f99;
+}
+
 table td {
   vertical-align: top;
 }
