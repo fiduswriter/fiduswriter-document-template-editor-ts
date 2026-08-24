@@ -52,6 +52,18 @@ import type {
 } from "./types.js";
 import type { FidusNode } from "@fiduswriter/document";
 
+/** Options accepted by the {@link DocumentTemplateDesigner} constructor. */
+export interface DesignerOptions {
+  /**
+   * Whether to show the "Document styles" / "Export templates" management
+   * buttons (which open dialogs backed by {@link DocumentTemplateApi}).
+   * Hosts that manage styles and export templates through their own UI (for
+   * example a CMS plugin admin) can set this to `false` and use the designer
+   * purely for the drag & drop document structure. Defaults to `true`.
+   */
+  manageStylesAndTemplates?: boolean;
+}
+
 export class DocumentTemplateDesigner {
   id: number;
   title: string;
@@ -61,6 +73,7 @@ export class DocumentTemplateDesigner {
   exportTemplates: ExportTemplate[];
   dom: HTMLElement;
   documentTemplateApi: DocumentTemplateApi;
+  manageStylesAndTemplates: boolean;
 
   editors: Array<[HTMLElement, EditorView]>;
   listeners: { onScroll: () => void };
@@ -74,6 +87,7 @@ export class DocumentTemplateDesigner {
     exportTemplates: ExportTemplate[],
     dom: HTMLElement,
     documentTemplateApi: DocumentTemplateApi,
+    options: DesignerOptions = {},
   ) {
     ensureCSS(staticUrl("css/fwtoolkit/input_list.css"));
     this.id = id;
@@ -87,6 +101,7 @@ export class DocumentTemplateDesigner {
     this.exportTemplates = exportTemplates;
     this.dom = dom;
     this.documentTemplateApi = documentTemplateApi;
+    this.manageStylesAndTemplates = options.manageStylesAndTemplates ?? true;
 
     this.editors = [];
     this.listeners = {
@@ -102,6 +117,7 @@ export class DocumentTemplateDesigner {
       documentStyles: this.documentStyles,
       exportTemplates: this.exportTemplates,
       citationStyles: this.citationStyles,
+      manageStylesAndTemplates: this.manageStylesAndTemplates,
     });
     ensureCSS([
       staticUrl("css/fwtoolkit/common.css"),

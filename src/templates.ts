@@ -914,6 +914,7 @@ export const documentDesignerTemplate = ({
   documentStyles,
   exportTemplates,
   citationStyles,
+  manageStylesAndTemplates = true,
 }: {
   id: number;
   value: DocumentTemplateValue;
@@ -921,6 +922,8 @@ export const documentDesignerTemplate = ({
   documentStyles: StyleLike[];
   exportTemplates: StyleLike[];
   citationStyles: Record<string, string>;
+  /** Show the document style / export template management rows. */
+  manageStylesAndTemplates?: boolean;
 }) =>
   `<table class="title-id"><tbody>
     <tr><td>${gettext("Title")}</td><td><input type="text" class="title vTextField fw-inline" value="${escapeText(title)}"></td></tr>
@@ -1043,7 +1046,7 @@ export const documentDesignerTemplate = ({
                 </td>
             </tr>
             ${
-              id
+              id && manageStylesAndTemplates
                 ? `<tr>
                     <td>
                         ${gettext("Document styles")}
