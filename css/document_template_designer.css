@@ -3,89 +3,89 @@
    standalone embeds get the canonical scheme so the drag & drop palette
    stays readable. */
 :root {
-  --part-neutral-background-color: #f0f8ff;
-  --part-neutral-border-color: #000000;
-  --part-heading-background-color: #84c4fe;
-  --part-contributors-background-color: #928efe;
-  --part-richtext-background-color: #ffc87b;
-  --part-tags-background-color: #ffdf7b;
-  --part-table-background-color: #bfedc1;
-  --part-toc-background-color: #985f99;
+    --part-neutral-background-color: #f0f8ff;
+    --part-neutral-border-color: #000000;
+    --part-heading-background-color: #84c4fe;
+    --part-contributors-background-color: #928efe;
+    --part-richtext-background-color: #ffc87b;
+    --part-tags-background-color: #ffdf7b;
+    --part-table-background-color: #bfedc1;
+    --part-toc-background-color: #985f99;
 }
 
 table td {
-  vertical-align: top;
+    vertical-align: top;
 }
 
 .label {
-  padding: 5px 0;
+    padding: 5px 0;
 }
 
 .from-container,
 .to-column,
 .trash {
-  border: 1px solid var(--cs-white-border);
-  background-color: var(--cs-white-background);
+    border: 1px solid var(--cs-white-border);
+    background-color: var(--cs-white-background);
 }
 
 .to-container {
-  min-height: 500px;
+    min-height: 500px;
 }
 
 .to-column .smooth-dnd-draggable-wrapper {
-  overflow: visible !important;
+    overflow: visible !important;
 }
 
 .to-column {
-  width: 650px;
+    width: 650px;
 }
 
 .to-column .doc-part table td {
-  border: 1px solid var(--cs-white-border);
+    border: 1px solid var(--cs-white-border);
 }
 
 .from-container {
-  width: 150px;
+    width: 150px;
 }
 
 .trash {
-  background-color: var(--cs-dark-background);
-  width: 100px;
+    background-color: var(--cs-dark-background);
+    width: 100px;
 }
 
 .doc-part-block {
-  background-color: var(--part-neutral-background-color);
-  border-bottom: 3px dotted var(--part-neutral-border-color);
-  padding: 4px;
+    background-color: var(--part-neutral-background-color);
+    border-bottom: 3px dotted var(--part-neutral-border-color);
+    padding: 4px;
 }
 
 .doc-part-block[data-type="heading_part"] {
-  background-color: var(--part-heading-background-color);
+    background-color: var(--part-heading-background-color);
 }
 
 .doc-part-block[data-type="contributors_part"] {
-  background-color: var(--part-contributors-background-color);
+    background-color: var(--part-contributors-background-color);
 }
 
 .doc-part-block[data-type="richtext_part"] {
-  background-color: var(--part-richtext-background-color);
+    background-color: var(--part-richtext-background-color);
 }
 
 .doc-part[data-type="tags_part"] {
-  background-color: var(--part-tags-background-color);
+    background-color: var(--part-tags-background-color);
 }
 
 .doc-part-block[data-type="table_part"] {
-  background-color: var(--part-table-background-color);
+    background-color: var(--part-table-background-color);
 }
 
 .doc-part-block[data-type="table_of_contents"] {
-  background-color: var(--part-toc-background-color);
+    background-color: var(--part-toc-background-color);
 }
 
 .from-container .doc-part-block,
 .trash .doc-part-block {
-  height: 50px;
+    height: 50px;
 }
 
 .from-container .attrs,
@@ -94,120 +94,120 @@ table td {
 .trash .object-tools,
 .from-container .doc-part-header .label,
 .attrs.hidden {
-  display: none;
+    display: none;
 }
 
 .attrs label {
-  display: inline-block;
-  width: initial;
-  float: initial;
+    display: inline-block;
+    width: initial;
+    float: initial;
 }
 
 .doc-part-header {
-  cursor: move; /* fallback if grab cursor is unsupported */
-  cursor: grab;
-  height: 60px;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    height: 60px;
 }
 
 .from-container .doc-part-header {
-  height: 100%;
+    height: 100%;
 }
 
 .object-tools.right {
-  float: right;
+    float: right;
 }
 
 .ProseMirror {
-  background-color: var(--cs-white-background);
-  color: var(--cs-white-text);
+    background-color: var(--cs-white-background);
+    color: var(--cs-white-text);
 }
 
 .ProseMirror-menubar {
-  background-color: inherit;
-  position: inherit;
-  min-height: 21px !important;
+    background-color: inherit;
+    position: inherit;
+    min-height: 21px !important;
 }
 
 .doc-table th {
-  background-color: var(--cs-6-background);
-  color: var(--cs-6-text);
+    background-color: var(--cs-6-background);
+    color: var(--cs-6-text);
 }
 
 .ProseMirror td.selectedCell {
-  background-color: var(--cs-2-background);
-  caret-color: transparent;
+    background-color: var(--cs-2-background);
+    caret-color: transparent;
 }
 
 .error-element {
-  border: 3px solid var(--error-background-color);
+    border: 3px solid var(--error-background-color);
 }
 
 #template-editor .initial em,
 #template-editor .instructions em {
-  font-style: italic;
+    font-style: italic;
 }
 
 #template-editor .initial strong,
 #template-editor .instructions strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #template-editor .initial code,
 #template-editor .instructions code {
-  font-family: monospace;
+    font-family: monospace;
 }
 
 #template-editor .initial h1,
 #template-editor .instructions h1 {
-  font-size: 28px;
+    font-size: 28px;
 }
 
 #template-editor .initial h2,
 #template-editor .instructions h2 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 #template-editor .initial h3,
 #template-editor .instructions h3 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 #template-editor .initial h4,
 #template-editor .instructions h4 {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 #template-editor .initial h5,
 #template-editor .instructions h5 {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 #template-editor .initial h6,
 #template-editor .instructions h6 {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 #template-editor .initial ul,
 #template-editor .instructions ul {
-  list-style-type: disc;
+    list-style-type: disc;
 }
 
 #template-editor .initial ol,
 #template-editor .instructions ol {
-  list-style-type: decimal;
+    list-style-type: decimal;
 }
 
 .object-tools span.link {
-  display: block;
-  cursor: pointer;
-  border-radius: 15px;
-  background-color: var(--cs-2-background);
-  color: var(--cs-2-text);
-  padding: 3px 12px;
+    display: block;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: var(--cs-2-background);
+    color: var(--cs-2-text);
+    padding: 3px 12px;
 }
 
 .id-types-value input[type="text"] {
-  background-color: var(--cs-white-background);
-  border: 1px solid var(--cs-white-border);
-  padding: 2px 6px;
+    background-color: var(--cs-white-background);
+    border: 1px solid var(--cs-white-border);
+    padding: 2px 6px;
 }

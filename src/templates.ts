@@ -1,39 +1,39 @@
-import type { FidusNode } from "@fiduswriter/document";
-import { CATS } from "@fiduswriter/document/schema/i18n";
-import { LANGUAGES, PAPER_SIZES } from "@fiduswriter/document/schema/const";
-import { escapeText, gettext } from "fwtoolkit";
+import type { FidusNode } from "@fiduswriter/document"
+import { CATS } from "@fiduswriter/document/schema/i18n"
+import { LANGUAGES, PAPER_SIZES } from "@fiduswriter/document/schema/const"
+import { escapeText, gettext } from "fwtoolkit"
 
 import type {
-  ContributorIdType,
-  DocumentTemplateValue,
-  PartAttrs,
-} from "./types.js";
+    ContributorIdType,
+    DocumentTemplateValue,
+    PartAttrs
+} from "./types.js"
 
 interface AllowedElementsOptions {
-  isFootnote?: boolean;
-  isTable?: boolean;
+    isFootnote?: boolean
+    isTable?: boolean
 }
 
 interface HeadingPartAttrs extends PartAttrs {
-  elements?: string[];
-  marks?: string[];
+    elements?: string[]
+    marks?: string[]
 }
 
 interface RichtextPartAttrs extends PartAttrs {
-  elements?: string[];
-  marks?: string[];
+    elements?: string[]
+    marks?: string[]
 }
 
 interface TablePartAttrs extends PartAttrs {
-  elements?: string[];
-  marks?: string[];
+    elements?: string[]
+    marks?: string[]
 }
 
 const allowedElementsTemplate = (
-  { elements = [] }: { elements?: string[] },
-  { isFootnote = false, isTable = false }: AllowedElementsOptions = {},
+    { elements = [] }: { elements?: string[] },
+    { isFootnote = false, isTable = false }: AllowedElementsOptions = {}
 ) =>
-  `<div class="label">
+    `<div class="label">
     ${gettext("Allowed elements")}
 </div>
 <label>
@@ -65,9 +65,9 @@ const allowedElementsTemplate = (
     ${gettext("Heading 6")}
 </label>
 ${
-  isFootnote
-    ? ""
-    : `<label>
+    isFootnote
+        ? ""
+        : `<label>
         <input type="checkbox" class="elements" value="code_block" ${elements.includes("code_block") ? "checked" : ""}/>
         ${gettext("Code block")}
     </label>`
@@ -105,24 +105,24 @@ ${
     ${gettext("Blockquote")}
 </label>
 ${
-  isFootnote
-    ? ""
-    : `<label>
+    isFootnote
+        ? ""
+        : `<label>
         <input type="checkbox" class="elements" value="footnote" ${elements.includes("footnote") ? "checked" : ""}/>
         ${gettext("Footnote")}
     </label>`
 }
 ${
-  isTable
-    ? ""
-    : `<label>
+    isTable
+        ? ""
+        : `<label>
         <input type="checkbox" class="elements" value="table" ${elements.includes("table") ? "checked" : ""}/>
         ${gettext("Table")}
     </label>`
-}`;
+}`
 
 const allowedMarksTemplate = ({ marks = [] }: { marks?: string[] }) =>
-  `<div class="label">
+    `<div class="label">
     ${gettext("Allowed marks")}
 </div>
 <label>
@@ -152,26 +152,26 @@ const allowedMarksTemplate = ({ marks = [] }: { marks?: string[] }) =>
 <label>
     <input type="checkbox" class="marks" value="code" ${marks.includes("code") ? "checked" : ""}/>
     ${gettext("Code")}
-</label>`;
+</label>`
 
 const headingTemplate = ({
-  id = "",
-  title = "",
-  elements = [
-    "heading1",
-    "heading2",
-    "heading3",
-    "heading4",
-    "heading5",
-    "heading6",
-  ],
-  marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
-  locking = "false",
-  optional = "false",
-  language = false,
-  metadata = false,
+    id = "",
+    title = "",
+    elements = [
+        "heading1",
+        "heading2",
+        "heading3",
+        "heading4",
+        "heading5",
+        "heading6"
+    ],
+    marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
+    locking = "false",
+    optional = "false",
+    language = false,
+    metadata = false
 }: Partial<HeadingPartAttrs>) =>
-  `<div class="doc-part-block" data-type="heading_part">
+    `<div class="doc-part-block" data-type="heading_part">
     <div class="doc-part-header">
         ${gettext("Heading")}
         <ul class="object-tools right">
@@ -238,8 +238,8 @@ const headingTemplate = ({
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
                 ${LANGUAGES.map(
-                  ([code, name]) =>
-                    `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`,
+                    ([code, name]) =>
+                        `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`
                 ).join("")}
             </select>
         </div>
@@ -252,17 +252,17 @@ const headingTemplate = ({
             <div class="instructions"></div>
         </div>
     </div>
-</div>`;
+</div>`
 
 const contributorsTemplate = ({
-  id = "",
-  title = "",
-  item_title = "",
-  locking = "false",
-  optional = "false",
-  metadata = false,
+    id = "",
+    title = "",
+    item_title = "",
+    locking = "false",
+    optional = "false",
+    metadata = false
 }: Partial<PartAttrs>) =>
-  `<div class="doc-part-block" data-type="contributors_part">
+    `<div class="doc-part-block" data-type="contributors_part">
     <div class="doc-part-header">
         ${gettext("Namelist")}
         <ul class="object-tools right">
@@ -310,36 +310,36 @@ const contributorsTemplate = ({
             <div class="instructions"></div>
         </div>
     </div>
-</div>`;
+</div>`
 
 const richtextTemplate = ({
-  id = "",
-  title = "",
-  elements = [
-    "paragraph",
-    "heading1",
-    "heading2",
-    "heading3",
-    "heading4",
-    "heading5",
-    "heading6",
-    "figure",
-    "ordered_list",
-    "bullet_list",
-    "horizontal_rule",
-    "equation",
-    "citation",
-    "cross_reference",
-    "blockquote",
-    "footnote",
-  ],
-  marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
-  locking = "false",
-  optional = "false",
-  language = false,
-  metadata = false,
+    id = "",
+    title = "",
+    elements = [
+        "paragraph",
+        "heading1",
+        "heading2",
+        "heading3",
+        "heading4",
+        "heading5",
+        "heading6",
+        "figure",
+        "ordered_list",
+        "bullet_list",
+        "horizontal_rule",
+        "equation",
+        "citation",
+        "cross_reference",
+        "blockquote",
+        "footnote"
+    ],
+    marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
+    locking = "false",
+    optional = "false",
+    language = false,
+    metadata = false
 }: Partial<RichtextPartAttrs>) =>
-  `<div class="doc-part-block" data-type="richtext_part">
+    `<div class="doc-part-block" data-type="richtext_part">
     <div class="doc-part-header">
         ${gettext("Richtext")}
         <ul class="object-tools right">
@@ -388,8 +388,8 @@ const richtextTemplate = ({
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
                 ${LANGUAGES.map(
-                  ([code, name]) =>
-                    `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`,
+                    ([code, name]) =>
+                        `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`
                 ).join("")}
             </select>
         </div>
@@ -402,27 +402,27 @@ const richtextTemplate = ({
             <div class="instructions"></div>
         </div>
     </div>
-</div>`;
+</div>`
 
 const separatorTemplate = ({ id = "" }: { id?: string }) =>
-  `<div class="doc-part-block" data-type="separator_part">
+    `<div class="doc-part-block" data-type="separator_part">
     <div class="doc-part-header">
         ${gettext("Separator")}
         <div class="label">
             ${gettext("ID")} <input type="text" class="id fw-inline" value="${escapeText(id)}">
         </div>
     </div>
-</div>`;
+</div>`
 
 const tagsTemplate = ({
-  id = "",
-  title = "",
-  item_title = "",
-  locking = "false",
-  optional = "false",
-  metadata = false,
+    id = "",
+    title = "",
+    item_title = "",
+    locking = "false",
+    optional = "false",
+    metadata = false
 }: Partial<PartAttrs>) =>
-  `<div class="doc-part-block" data-type="tags_part">
+    `<div class="doc-part-block" data-type="tags_part">
     <div class="doc-part-header">
         ${gettext("Tags")}
         <ul class="object-tools right">
@@ -466,36 +466,36 @@ const tagsTemplate = ({
             <div class="instructions"></div>
         </div>
     </div>
-</div>`;
+</div>`
 
 const tableTemplate = ({
-  id = "",
-  title = "",
-  elements = [
-    "paragraph",
-    "heading1",
-    "heading2",
-    "heading3",
-    "heading4",
-    "heading5",
-    "heading6",
-    "code_block",
-    "figure",
-    "ordered_list",
-    "bullet_list",
-    "horizontal_rule",
-    "equation",
-    "citation",
-    "cross_reference",
-    "blockquote",
-    "footnote",
-  ],
-  marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
-  locking = "false",
-  optional = "false",
-  language = false,
+    id = "",
+    title = "",
+    elements = [
+        "paragraph",
+        "heading1",
+        "heading2",
+        "heading3",
+        "heading4",
+        "heading5",
+        "heading6",
+        "code_block",
+        "figure",
+        "ordered_list",
+        "bullet_list",
+        "horizontal_rule",
+        "equation",
+        "citation",
+        "cross_reference",
+        "blockquote",
+        "footnote"
+    ],
+    marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
+    locking = "false",
+    optional = "false",
+    language = false
 }: Partial<TablePartAttrs>) =>
-  `<div class="doc-part-block" data-type="table_part">
+    `<div class="doc-part-block" data-type="table_part">
     <div class="doc-part-header">
         ${gettext("Table")}
         <ul class="object-tools right">
@@ -529,8 +529,8 @@ const tableTemplate = ({
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
                 ${LANGUAGES.map(
-                  ([code, name]) =>
-                    `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`,
+                    ([code, name]) =>
+                        `<option value="${code}" ${language === code ? "selected" : ""}>${name}</option>`
                 ).join("")}
             </select>
         </div>
@@ -543,14 +543,14 @@ const tableTemplate = ({
             <div class="instructions"></div>
         </div>
     </div>
-</div>`;
+</div>`
 
 const tocTemplate = ({
-  id = "",
-  title = "",
-  optional = "false",
+    id = "",
+    title = "",
+    optional = "false"
 }: Partial<PartAttrs>) =>
-  `<div class="doc-part-block" data-type="table_of_contents">
+    `<div class="doc-part-block" data-type="table_of_contents">
     <div class="doc-part-header">
         ${gettext("Table of Contents")}
         <ul class="object-tools right">
@@ -572,125 +572,125 @@ const tocTemplate = ({
             </select>
         </div>
     </div>
-</div>`;
+</div>`
 
 const footnoteTemplate = ({
-  footnote_elements = [
-    "paragraph",
-    "heading1",
-    "heading2",
-    "heading3",
-    "heading4",
-    "heading5",
-    "heading6",
-    "figure",
-    "ordered_list",
-    "bullet_list",
-    "horizontal_rule",
-    "equation",
-    "citation",
-    "cross_reference",
-    "blockquote",
-    "table",
-  ],
-  footnote_marks = ["strong", "em", "underline", "link", "sup", "sub", "code"],
+    footnote_elements = [
+        "paragraph",
+        "heading1",
+        "heading2",
+        "heading3",
+        "heading4",
+        "heading5",
+        "heading6",
+        "figure",
+        "ordered_list",
+        "bullet_list",
+        "horizontal_rule",
+        "equation",
+        "citation",
+        "cross_reference",
+        "blockquote",
+        "table"
+    ],
+    footnote_marks = ["strong", "em", "underline", "link", "sup", "sub", "code"]
 }: {
-  footnote_elements?: string[];
-  footnote_marks?: string[];
+    footnote_elements?: string[]
+    footnote_marks?: string[]
 }) =>
-  `<div class="doc-part-block attrs">${allowedElementsTemplate({ elements: footnote_elements }, { isFootnote: true })}${allowedMarksTemplate({ marks: footnote_marks })}</div>`;
+    `<div class="doc-part-block attrs">${allowedElementsTemplate({ elements: footnote_elements }, { isFootnote: true })}${allowedMarksTemplate({ marks: footnote_marks })}</div>`
 
 const citationstylesTemplate = (
-  { citationstyles = ["apa"] }: { citationstyles?: string[] },
-  allCitationStyles: Record<string, string>,
+    { citationstyles = ["apa"] }: { citationstyles?: string[] },
+    allCitationStyles: Record<string, string>
 ) =>
-  `<select multiple size=5>
+    `<select multiple size=5>
 ${Object.entries(allCitationStyles)
-  .map(
-    ([key, value]) =>
-      `<option value="${key}"${citationstyles.includes(key) ? " selected" : ""}>${value}</option>`,
-  )
-  .join("")}
-</select>`;
+    .map(
+        ([key, value]) =>
+            `<option value="${key}"${citationstyles.includes(key) ? " selected" : ""}>${value}</option>`
+    )
+    .join("")}
+</select>`
 
 export const citationstyleTemplate = (
-  {
-    citationstyle = "apa",
-    citationstyles = ["apa"],
-  }: { citationstyle?: string | false; citationstyles?: string[] },
-  allCitationStyles: Record<string, string>,
+    {
+        citationstyle = "apa",
+        citationstyles = ["apa"]
+    }: { citationstyle?: string | false; citationstyles?: string[] },
+    allCitationStyles: Record<string, string>
 ) => {
-  if (citationstyle === false || !citationstyles.includes(citationstyle)) {
-    citationstyle = citationstyles[0];
-  }
-  return `<select>
+    if (citationstyle === false || !citationstyles.includes(citationstyle)) {
+        citationstyle = citationstyles[0]
+    }
+    return `<select>
         ${citationstyles
-          .map(
-            (key) =>
-              `<option value="${key}"${citationstyle === key ? " selected" : ""}>${
-                allCitationStyles[key]
-              }</option>`,
-          )
-          .join("")}
-    </select>`;
-};
+            .map(
+                key =>
+                    `<option value="${key}"${citationstyle === key ? " selected" : ""}>${
+                        allCitationStyles[key]
+                    }</option>`
+            )
+            .join("")}
+    </select>`
+}
 
 const languagesTemplate = ({
-  languages = LANGUAGES.map((lang) => lang[0]),
+    languages = LANGUAGES.map(lang => lang[0])
 }: {
-  languages?: string[];
+    languages?: string[]
 }) =>
-  `<select multiple size=5>
-${LANGUAGES.map((lang) => `<option value="${lang[0]}"${languages.includes(lang[0]) ? " selected" : ""}>${lang[1]}</option>`).join("")}
-</select>`;
+    `<select multiple size=5>
+${LANGUAGES.map(lang => `<option value="${lang[0]}"${languages.includes(lang[0]) ? " selected" : ""}>${lang[1]}</option>`).join("")}
+</select>`
 
 export const languageTemplate = ({
-  language = "en-US",
-  languages = LANGUAGES.map((lang) => lang[0]),
+    language = "en-US",
+    languages = LANGUAGES.map(lang => lang[0])
 }: {
-  language?: string | false;
-  languages?: string[];
+    language?: string | false
+    languages?: string[]
 }) => {
-  if (language === false || !languages.includes(language)) {
-    language = languages[0];
-  }
-  return `<select>
-        ${LANGUAGES.filter((lang) => languages.includes(lang[0]))
-          .map(
-            (lang) =>
-              `<option value="${lang[0]}"${language === lang[0] ? " selected" : ""}>${lang[1]}</option>`,
-          )
-          .join("")}
-    </select>`;
-};
+    if (language === false || !languages.includes(language)) {
+        language = languages[0]
+    }
+    return `<select>
+        ${LANGUAGES.filter(lang => languages.includes(lang[0]))
+            .map(
+                lang =>
+                    `<option value="${lang[0]}"${language === lang[0] ? " selected" : ""}>${lang[1]}</option>`
+            )
+            .join("")}
+    </select>`
+}
 
 const papersizesTemplate = ({
-  papersizes = PAPER_SIZES.map((size) => size[0]),
+    papersizes = PAPER_SIZES.map(size => size[0])
 }: {
-  papersizes?: string[];
+    papersizes?: string[]
 }) =>
-  `<select multiple size=5>
-${PAPER_SIZES.map((size) => `<option value="${size[0]}"${papersizes.includes(size[0]) ? " selected" : ""}>${size[0]}</option>`).join("")}
-</select>`;
+    `<select multiple size=5>
+${PAPER_SIZES.map(size => `<option value="${size[0]}"${papersizes.includes(size[0]) ? " selected" : ""}>${size[0]}</option>`).join("")}
+</select>`
 
 const languageSelector = (language: string) =>
-  `<select>
-${LANGUAGES.map((lang) => `<option value="${lang[0]}"${language === lang[0] ? " selected" : ""}>${lang[1]}</option>`).join("")}
-</select>`;
+    `<select>
+${LANGUAGES.map(lang => `<option value="${lang[0]}"${language === lang[0] ? " selected" : ""}>${lang[1]}</option>`).join("")}
+</select>`
 
 export const bibliographyHeaderTemplate = ({
-  bibliography_header = { zzz: "" },
+    bibliography_header = { zzz: "" }
 }: {
-  bibliography_header?: Record<string, string>;
+    bibliography_header?: Record<string, string>
 }) => {
-  let translations = Object.entries(bibliography_header);
-  if (!translations.length) {
-    translations = [["zzz", ""]];
-  }
-  return `<table class="fw-dialog-table fw-small fw-input-list-wrapper">${translations
-    .map(
-      (translation) =>
-        `<tr>
+    let translations = Object.entries(bibliography_header)
+    if (!translations.length) {
+        translations = [["zzz", ""]]
+    }
+    return `<table class="fw-dialog-table fw-small fw-input-list-wrapper">${translations
+        .map(
+            translation =>
+                `<tr>
                     <td>${languageSelector(translation[0])}</td>
                     <td>
                         <input type="text" value="${escapeText(translation[1])}" >
@@ -698,21 +698,21 @@ export const bibliographyHeaderTemplate = ({
                     <td class="input-field-list-ctrl">
                         <span class="fa-solid fa-minus-circle" tabindex="0"></span>&nbsp;<span class="fa-solid fa-plus-circle" tabindex="0"></span>
                     </td>
-                </tr>`,
-    )
-    .join("")}</table>`;
-};
+                </tr>`
+        )
+        .join("")}</table>`
+}
 
 export const idTypesTemplate = ({
-  id_types = [],
+    id_types = []
 }: {
-  id_types?: ContributorIdType[];
+    id_types?: ContributorIdType[]
 }) => {
-  const types = id_types.length ? id_types : [{ label: "", regex: "" }];
-  return `<table class="fw-dialog-table fw-small fw-input-list-wrapper id-types-value">${types
-    .map(
-      (type) =>
-        `<tr>
+    const types = id_types.length ? id_types : [{ label: "", regex: "" }]
+    return `<table class="fw-dialog-table fw-small fw-input-list-wrapper id-types-value">${types
+        .map(
+            type =>
+                `<tr>
                     <td>
                         <input type="text" class="id-type-label" placeholder="${gettext("Label")}" value="${escapeText(type.label)}" >
                     </td>
@@ -722,210 +722,206 @@ export const idTypesTemplate = ({
                     <td class="input-field-list-ctrl">
                         <span class="fa-solid fa-minus-circle" tabindex="0"></span>&nbsp;<span class="fa-solid fa-plus-circle" tabindex="0"></span>
                     </td>
-                </tr>`,
-    )
-    .join("")}</table>`;
-};
+                </tr>`
+        )
+        .join("")}</table>`
+}
 
 const codeLanguagesTemplate = ({
-  code_languages = [
-    "javascript",
-    "python",
-    "java",
-    "cpp",
-    "c",
-    "csharp",
-    "php",
-    "ruby",
-    "go",
-    "rust",
-    "swift",
-    "kotlin",
-    "typescript",
-    "html",
-    "css",
-    "sql",
-    "bash",
-    "shell",
-    "r",
-    "matlab",
-    "scala",
-    "perl",
-    "lua",
-    "haskell",
-    "xml",
-    "json",
-    "yaml",
-    "markdown",
-  ],
+    code_languages = [
+        "javascript",
+        "python",
+        "java",
+        "cpp",
+        "c",
+        "csharp",
+        "php",
+        "ruby",
+        "go",
+        "rust",
+        "swift",
+        "kotlin",
+        "typescript",
+        "html",
+        "css",
+        "sql",
+        "bash",
+        "shell",
+        "r",
+        "matlab",
+        "scala",
+        "perl",
+        "lua",
+        "haskell",
+        "xml",
+        "json",
+        "yaml",
+        "markdown"
+    ]
 }: {
-  code_languages?: string[];
+    code_languages?: string[]
 }) => {
-  const allLanguages = [
-    "javascript",
-    "python",
-    "java",
-    "cpp",
-    "c",
-    "csharp",
-    "php",
-    "ruby",
-    "go",
-    "rust",
-    "swift",
-    "kotlin",
-    "typescript",
-    "html",
-    "css",
-    "sql",
-    "bash",
-    "shell",
-    "r",
-    "matlab",
-    "scala",
-    "perl",
-    "lua",
-    "haskell",
-    "xml",
-    "json",
-    "yaml",
-    "markdown",
-  ];
-  return `<select multiple size=10>
-${allLanguages.map((lang) => `<option value="${lang}"${code_languages.includes(lang) ? " selected" : ""}>${lang}</option>`).join("")}
-</select>`;
-};
+    const allLanguages = [
+        "javascript",
+        "python",
+        "java",
+        "cpp",
+        "c",
+        "csharp",
+        "php",
+        "ruby",
+        "go",
+        "rust",
+        "swift",
+        "kotlin",
+        "typescript",
+        "html",
+        "css",
+        "sql",
+        "bash",
+        "shell",
+        "r",
+        "matlab",
+        "scala",
+        "perl",
+        "lua",
+        "haskell",
+        "xml",
+        "json",
+        "yaml",
+        "markdown"
+    ]
+    return `<select multiple size=10>
+${allLanguages.map(lang => `<option value="${lang}"${code_languages.includes(lang) ? " selected" : ""}>${lang}</option>`).join("")}
+</select>`
+}
 
 const codeCategoriesTemplate = ({
-  code_categories = {},
+    code_categories = {}
 }: {
-  code_categories?: Record<string, { counter: number; enabled: boolean }>;
+    code_categories?: Record<string, { counter: number; enabled: boolean }>
 }) => {
-  const allCategories = Object.keys(CATS);
-  const defaultCategories = {
-    listing: { counter: 0, enabled: true },
-    example: { counter: 0, enabled: true },
-    snippet: { counter: 0, enabled: false },
-    tutorial: { counter: 0, enabled: false },
-    exercise: { counter: 0, enabled: false },
-    exercise_solution: { counter: 0, enabled: false },
-  };
-  const categories = Object.assign({}, defaultCategories, code_categories);
+    const allCategories = Object.keys(CATS)
+    const defaultCategories = {
+        listing: { counter: 0, enabled: true },
+        example: { counter: 0, enabled: true },
+        snippet: { counter: 0, enabled: false },
+        tutorial: { counter: 0, enabled: false },
+        exercise: { counter: 0, enabled: false },
+        exercise_solution: { counter: 0, enabled: false }
+    }
+    const categories = Object.assign({}, defaultCategories, code_categories)
 
-  return `<div class="code-categories-config">
+    return `<div class="code-categories-config">
         <p>${gettext("Select which code block categories are available:")}</p>
         ${allCategories
-          .map((cat) => {
-            const isCodeCategory = [
-              "listing",
-              "example",
-              "snippet",
-              "tutorial",
-              "exercise",
-              "exercise_solution",
-            ].includes(cat);
-            if (!isCodeCategory) {
-              return "";
-            }
-            const enabled = categories[cat]?.enabled || false;
-            return `<label>
+            .map(cat => {
+                const isCodeCategory = [
+                    "listing",
+                    "example",
+                    "snippet",
+                    "tutorial",
+                    "exercise",
+                    "exercise_solution"
+                ].includes(cat)
+                if (!isCodeCategory) {
+                    return ""
+                }
+                const enabled = categories[cat]?.enabled || false
+                return `<label>
                     <input type="checkbox" class="code-category" value="${cat}" ${enabled ? "checked" : ""}/>
                     ${CATS[cat]["en-US"] || cat}
-                </label>`;
-          })
-          .join("")}
-    </div>`;
-};
+                </label>`
+            })
+            .join("")}
+    </div>`
+}
 
 const templateEditorValueTemplate = ({ content }: { content: FidusNode[] }) =>
-  content
-    .map((docPart) => {
-      const attrs = (docPart.attrs || {}) as PartAttrs;
-      switch (docPart.type) {
-        case "heading_part":
-          return headingTemplate(attrs);
-        case "contributors_part":
-          return contributorsTemplate(attrs);
-        case "richtext_part":
-          return richtextTemplate(attrs);
-        case "tags_part":
-          return tagsTemplate(attrs);
-        case "table_part":
-          return tableTemplate(attrs);
-        case "table_of_contents":
-          return tocTemplate(attrs);
-        case "separator_part":
-          return separatorTemplate(attrs);
-        default:
-          return "";
-      }
-    })
-    .join("");
+    content
+        .map(docPart => {
+            const attrs = (docPart.attrs || {}) as PartAttrs
+            switch (docPart.type) {
+                case "heading_part":
+                    return headingTemplate(attrs)
+                case "contributors_part":
+                    return contributorsTemplate(attrs)
+                case "richtext_part":
+                    return richtextTemplate(attrs)
+                case "tags_part":
+                    return tagsTemplate(attrs)
+                case "table_part":
+                    return tableTemplate(attrs)
+                case "table_of_contents":
+                    return tocTemplate(attrs)
+                case "separator_part":
+                    return separatorTemplate(attrs)
+                default:
+                    return ""
+            }
+        })
+        .join("")
 
 export interface StyleLike {
-  pk: number;
-  fields: {
-    title: string;
-  };
+    pk: number
+    fields: {
+        title: string
+    }
 }
 
 export const documentStylesTemplate = ({
-  documentStyles,
+    documentStyles
 }: {
-  documentStyles: StyleLike[];
+    documentStyles: StyleLike[]
 }) =>
-  `${documentStyles
-    .map(
-      (
-        style,
-      ) => `<button class="fw-green fw-small fw-button fw-dialog-titlebar-button document-style" data-id="${style.pk}">
+    `${documentStyles
+        .map(
+            style => `<button class="fw-green fw-small fw-button fw-dialog-titlebar-button document-style" data-id="${style.pk}">
         ${escapeText(style.fields.title)}
-    </button>`,
-    )
-    .join("")}
+    </button>`
+        )
+        .join("")}
 <button class="fw-green fw-small fw-button fw-dialog-titlebar-button document-style" data-id="0">
     <i class="fa-solid fa-plus-circle"></i>
     ${gettext("Add new document style")}
-</button>`;
+</button>`
 
 export const exportTemplatesTemplate = ({
-  exportTemplates,
+    exportTemplates
 }: {
-  exportTemplates: StyleLike[];
+    exportTemplates: StyleLike[]
 }) =>
-  `${exportTemplates
-    .map(
-      (
-        template,
-      ) => `<button class="fw-green fw-small fw-button fw-dialog-titlebar-button export-template" data-id="${template.pk}">
+    `${exportTemplates
+        .map(
+            template => `<button class="fw-green fw-small fw-button fw-dialog-titlebar-button export-template" data-id="${template.pk}">
         ${escapeText(template.fields.title)}
-    </button>`,
-    )
-    .join("")}
+    </button>`
+        )
+        .join("")}
 <button class="fw-green fw-small fw-button fw-dialog-titlebar-button export-template" data-id="0">
     <i class="fa-solid fa-plus-circle"></i>
     ${gettext("Add new export template")}
-</button>`;
+</button>`
 
 export const documentDesignerTemplate = ({
-  id,
-  value,
-  title,
-  documentStyles,
-  exportTemplates,
-  citationStyles,
-  manageStylesAndTemplates = true,
+    id,
+    value,
+    title,
+    documentStyles,
+    exportTemplates,
+    citationStyles,
+    manageStylesAndTemplates = true
 }: {
-  id: number;
-  value: DocumentTemplateValue;
-  title: string;
-  documentStyles: StyleLike[];
-  exportTemplates: StyleLike[];
-  citationStyles: Record<string, string>;
-  /** Show the document style / export template management rows. */
-  manageStylesAndTemplates?: boolean;
+    id: number
+    value: DocumentTemplateValue
+    title: string
+    documentStyles: StyleLike[]
+    exportTemplates: StyleLike[]
+    citationStyles: Record<string, string>
+    /** Show the document style / export template management rows. */
+    manageStylesAndTemplates?: boolean
 }) =>
-  `<table class="title-id"><tbody>
+    `<table class="title-id"><tbody>
     <tr><td>${gettext("Title")}</td><td><input type="text" class="title vTextField fw-inline" value="${escapeText(title)}"></td></tr>
     <tr><td>${gettext("ID")}</td><td><input type="text" class="import-id vTextField fw-inline" value="${escapeText(value.attrs.import_id || "")}"></td></tr>
     </tbody></table>
@@ -1046,8 +1042,8 @@ export const documentDesignerTemplate = ({
                 </td>
             </tr>
             ${
-              id && manageStylesAndTemplates
-                ? `<tr>
+                id && manageStylesAndTemplates
+                    ? `<tr>
                     <td>
                         ${gettext("Document styles")}
                     </td>
@@ -1067,7 +1063,7 @@ export const documentDesignerTemplate = ({
                         </div>
                     </td>
                 </tr>`
-                : ""
+                    : ""
             }
         </tbody>
-    </table>`;
+    </table>`

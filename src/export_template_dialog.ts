@@ -1,126 +1,140 @@
 import {
-  Dialog,
-  escapeText,
-  findTarget,
-  gettext,
-  get,
-  interpolate,
-} from "fwtoolkit";
-import JSZip from "jszip";
+    Dialog,
+    escapeText,
+    findTarget,
+    gettext,
+    get,
+    interpolate
+} from "fwtoolkit"
+import JSZip from "jszip"
 
 import type {
-  DocumentTemplateApi,
-  DocumentTemplateValue,
-  ExportTemplate,
-  SaveExportTemplateResponse,
-} from "./types.js";
+    DocumentTemplateApi,
+    DocumentTemplateValue,
+    ExportTemplate,
+    SaveExportTemplateResponse
+} from "./types.js"
 
 export class ExportTemplateDialog {
-  id: number;
-  template: ExportTemplate | undefined;
-  documentTemplateId: number;
-  allTemplates: ExportTemplate[];
-  refresh: () => void;
-  documentTemplateValue: DocumentTemplateValue;
-  documentTemplateApi: DocumentTemplateApi;
-  addedFile: File | false;
-  addedFileType: string | false;
-  dialog!: Dialog;
+    id: number
+    template: ExportTemplate | undefined
+    documentTemplateId: number
+    allTemplates: ExportTemplate[]
+    refresh: () => void
+    documentTemplateValue: DocumentTemplateValue
+    documentTemplateApi: DocumentTemplateApi
+    addedFile: File | false
+    addedFileType: string | false
+    dialog!: Dialog
 
-  constructor(
-    id: number,
-    template: ExportTemplate | undefined,
-    documentTemplateId: number,
-    allTemplates: ExportTemplate[],
-    refresh: () => void,
-    documentTemplateValue: DocumentTemplateValue,
-    documentTemplateApi: DocumentTemplateApi,
-  ) {
-    this.id = id;
-    this.template = template;
-    this.documentTemplateId = documentTemplateId;
-    this.allTemplates = allTemplates;
-    this.refresh = refresh;
-    this.documentTemplateValue = documentTemplateValue;
-    this.documentTemplateApi = documentTemplateApi;
-    this.addedFile = false;
-    this.addedFileType = false;
-  }
-
-  init() {
-    const buttons = [
-      {
-        text: gettext("Save"),
-        classes: "fw-dark",
-        click: () => {
-          const { errors } = this.checkCurrent();
-          if (errors.length) {
-            this.showErrors(errors);
-            return;
-          }
-          this.save()
-            .then((json: SaveExportTemplateResponse) => {
-              const exportTemplate = json.export_template[0];
-              const pk = exportTemplate.pk;
-              const oldTemplateIndex = this.allTemplates.findIndex(
-                (template) => template.pk === pk,
-              );
-              if (oldTemplateIndex > -1) {
-                this.allTemplates.splice(oldTemplateIndex, 1, exportTemplate);
-              } else {
-                this.allTemplates.push(exportTemplate);
-              }
-              this.refresh();
-              this.dialog.close();
-            })
-            .catch((response) => {
-              if (response.json) {
-                response
-                  .json()
-                  .then((json: { errors?: Record<string, string[]> }) => {
-                    if (json.errors) {
-                      const errors: string[] = [];
-                      Object.keys(json.errors).forEach((key) => {
-                        json.errors![key].forEach((error) =>
-                          errors.push(`${key}: ${error}`),
-                        );
-                      });
-                      this.showErrors(errors);
-                    }
-                  });
-              } else {
-                throw response;
-              }
-            });
-        },
-      },
-      {
-        type: "cancel" as const,
-      },
-      {
-        text: gettext("Help"),
-        click: () => this.showHelp(),
-      },
-    ];
-    if (this.id) {
-      buttons.unshift({
-        text: gettext("Delete"),
-        classes: "fw-orange",
-        click: () => this.deleteTemplateDialog(),
-      });
+    constructor(
+        id: number,
+        template: ExportTemplate | undefined,
+        documentTemplateId: number,
+        allTemplates: ExportTemplate[],
+        refresh: () => void,
+        documentTemplateValue: DocumentTemplateValue,
+        documentTemplateApi: DocumentTemplateApi
+    ) {
+        this.id = id
+        this.template = template
+        this.documentTemplateId = documentTemplateId
+        this.allTemplates = allTemplates
+        this.refresh = refresh
+        this.documentTemplateValue = documentTemplateValue
+        this.documentTemplateApi = documentTemplateApi
+        this.addedFile = false
+        this.addedFileType = false
     }
-    this.dialog = new Dialog({
-      id: "export-template-dialog",
-      title: gettext("Export template"),
-      width: 400,
-      body: `<table class="fw-dialog-table fw-data-table"><tbody>
+
+    init() {
+        const buttons = [
+            {
+                text: gettext("Save"),
+                classes: "fw-dark",
+                click: () => {
+                    const { errors } = this.checkCurrent()
+                    if (errors.length) {
+                        this.showErrors(errors)
+                        return
+                    }
+                    this.save()
+                        .then((json: SaveExportTemplateResponse) => {
+                            const exportTemplate = json.export_template[0]
+                            const pk = exportTemplate.pk
+                            const oldTemplateIndex =
+                                this.allTemplates.findIndex(
+                                    template => template.pk === pk
+                                )
+                            if (oldTemplateIndex > -1) {
+                                this.allTemplates.splice(
+                                    oldTemplateIndex,
+                                    1,
+                                    exportTemplate
+                                )
+                            } else {
+                                this.allTemplates.push(exportTemplate)
+                            }
+                            this.refresh()
+                            this.dialog.close()
+                        })
+                        .catch(response => {
+                            if (response.json) {
+                                response
+                                    .json()
+                                    .then(
+                                        (json: {
+                                            errors?: Record<string, string[]>
+                                        }) => {
+                                            if (json.errors) {
+                                                const errors: string[] = []
+                                                Object.keys(
+                                                    json.errors
+                                                ).forEach(key => {
+                                                    json.errors![key].forEach(
+                                                        error =>
+                                                            errors.push(
+                                                                `${key}: ${error}`
+                                                            )
+                                                    )
+                                                })
+                                                this.showErrors(errors)
+                                            }
+                                        }
+                                    )
+                            } else {
+                                throw response
+                            }
+                        })
+                }
+            },
+            {
+                type: "cancel" as const
+            },
+            {
+                text: gettext("Help"),
+                click: () => this.showHelp()
+            }
+        ]
+        if (this.id) {
+            buttons.unshift({
+                text: gettext("Delete"),
+                classes: "fw-orange",
+                click: () => this.deleteTemplateDialog()
+            })
+        }
+        this.dialog = new Dialog({
+            id: "export-template-dialog",
+            title: gettext("Export template"),
+            width: 400,
+            body: `<table class="fw-dialog-table fw-data-table"><tbody>
                 <tr>
                     <th><h4 class="fw-tablerow-title">${gettext("File")}</h4></th>
                     <td style="width: 250px;">
                         <span class="export-template-file">${
-                          this.template
-                            ? `<a href="${this.template.fields.template_file}">${escapeText(this.template.fields.title)}</a>`
-                            : ""
+                            this.template
+                                ? `<a href="${this.template.fields.template_file}">${escapeText(this.template.fields.title)}</a>`
+                                : ""
                         }</span>
                     </td><td style="width: 70px;">
                         <button type="button" class="fw-media-select-button fw-button fw-light">
@@ -133,7 +147,7 @@ export class ExportTemplateDialog {
                     <th><h4 class="fw-tablerow-title">${gettext("Filetype")}</h4></th>
                     <td colspan="2">
                         <span class="export-template-filetype">${
-                          this.template ? this.template.fields.file_type : ""
+                            this.template ? this.template.fields.file_type : ""
                         }</span>
                     </td>
                 </tr>
@@ -151,276 +165,279 @@ export class ExportTemplateDialog {
                 </tr>
                 </tbody></table>
                 <ul class="fw-errorlist"></ul>`,
-      buttons,
-    });
-    this.dialog.open();
-    this.bind();
-    if (this.template) {
-      this.checkRemoteFile(this.template.fields.template_file);
-    }
-  }
-
-  showErrors(errors: string[]) {
-    this.dialog.dialogEl.querySelector("ul.fw-errorlist")!.innerHTML = errors
-      .map((error) => `<li>${escapeText(error)}</li>`)
-      .join("");
-  }
-
-  deleteTemplate() {
-    this.documentTemplateApi
-      .deleteExportTemplate(this.id)
-      .then(() => {
-        const oldTemplateIndex = this.allTemplates.findIndex(
-          (style) => style.pk === this.id,
-        );
-        if (!(typeof oldTemplateIndex === "undefined")) {
-          this.allTemplates.splice(oldTemplateIndex, 1);
-          this.refresh();
-        }
-        this.dialog.close();
-      })
-      .catch((response) => {
-        if (response.json) {
-          response
-            .json()
-            .then((json: { errors?: Record<string, string[]> }) => {
-              if (json.errors) {
-                const errors: string[] = [];
-                Object.keys(json.errors).forEach((key) => {
-                  json.errors![key].forEach((error) =>
-                    errors.push(`${key}: ${error}`),
-                  );
-                });
-                this.showErrors(errors);
-              }
-            });
-        } else {
-          throw response;
-        }
-      });
-  }
-
-  deleteTemplateDialog() {
-    const buttons = [
-      {
-        text: gettext("Delete"),
-        classes: "fw-dark",
-        click: () => {
-          dialog.close();
-          this.deleteTemplate();
-        },
-      },
-      {
-        type: "cancel" as const,
-      },
-    ];
-    const dialog = new Dialog({
-      id: "confirmdeletion",
-      icon: "exclamation-triangle",
-      title: gettext("Confirm deletion"),
-      body: `<p>${gettext("Do you really want to delete the export template?")}</p>`,
-      height: 180,
-      buttons,
-    });
-    dialog.open();
-  }
-
-  checkCurrent() {
-    const errors: string[] = [];
-
-    if (!this.addedFile) {
-      errors.push(
-        gettext("You need to upload a template file in ODT or DOCX format."),
-      );
-    } else if (
-      this.allTemplates.find(
-        (template) =>
-          template.fields.title ===
-            (this.addedFile as File).name.split(".")[0] &&
-          template.pk !== this.id,
-      )
-    ) {
-      errors.push(
-        gettext("Another export file with the same filename exists already."),
-      );
-    }
-    return { errors };
-  }
-
-  save() {
-    const jsonData = {
-      id: this.id,
-      template_id: this.documentTemplateId,
-      added_file_type: this.addedFileType,
-    };
-    return this.documentTemplateApi.saveExportTemplate(jsonData, {
-      added_file: this.addedFile as File,
-    });
-  }
-
-  checkRemoteFile(url: string) {
-    return get(url)
-      .then((response) => response.blob())
-      .then((blob) => this.checkFile(blob));
-  }
-
-  checkFile(blob: Blob) {
-    let fileType: "odt" | "docx" | undefined;
-    const zip = new JSZip();
-    return zip
-      .loadAsync(blob)
-      .then((zip) => {
-        if (zip.files["content.xml"]) {
-          fileType = "odt";
-          return zip.files["content.xml"].async("string");
-        } else if (zip.files["word/document.xml"]) {
-          fileType = "docx";
-          return zip.files["word/document.xml"].async("string");
-        } else {
-          throw new Error(gettext("Unknown filetype"));
-        }
-      })
-      .then((string) => {
-        const expectedTags = this.documentTemplateValue.content
-          .map((node) => {
-            switch (node.type) {
-              case "title":
-                return "title";
-              case "richtext_part":
-              case "table_part":
-                return `@${(node.attrs as { id: string }).id}`;
-              case "heading_part":
-              case "contributors_part":
-              case "tags_part":
-                return (node.attrs as { id: string }).id;
-              default:
-                return false;
-            }
-          })
-          .concat(["@bibliography", "@copyright", "@licenses"])
-          .filter((tag): tag is string => !!tag);
-        const parser = new window.DOMParser();
-        const xml = parser.parseFromString(string, "text/xml");
-        if (fileType === "odt") {
-          this.checkODT(xml, expectedTags);
-        } else {
-          this.checkDOCX(xml, expectedTags);
-        }
-        return fileType as "odt" | "docx";
-      });
-  }
-
-  setStatus(_fileType: string, foundTags: string[], missingTags: string[]) {
-    this.dialog.dialogEl.querySelector(
-      ".export-template-found-tags",
-    )!.innerHTML = foundTags.join(", ");
-    this.dialog.dialogEl.querySelector(
-      ".export-template-missing-tags",
-    )!.innerHTML = missingTags.join(", ");
-  }
-
-  checkTagPresence(text: string, tag: string) {
-    // Simple replacement: {tag}
-    if (text.includes(`{${tag}}`)) {
-      return true;
-    }
-    // Format string: {tag:format=...}
-    if (text.includes(`{${tag}:format=`)) {
-      return true;
-    }
-    // Loop block: {BEGIN_tag} or {BEGIN_tag:limit=N}
-    if (
-      text.includes(`{BEGIN_${tag}}`) ||
-      text.includes(`{BEGIN_${tag}:limit=`)
-    ) {
-      return true;
-    }
-    // Conditional referencing tag: {IF(tag...)} or {ELIF(tag...)}
-    const ifRegex = new RegExp(`\\{IF\\(${tag}\\.`, "g");
-    const elifRegex = new RegExp(`\\{ELIF\\(${tag}\\.`, "g");
-    if (ifRegex.test(text) || elifRegex.test(text)) {
-      return true;
-    }
-    return false;
-  }
-
-  checkODT(xml: Document, expectedTags: string[]) {
-    const pars = xml.querySelectorAll("p");
-    const foundTags: string[] = [];
-
-    pars.forEach((par) => {
-      const text = par.textContent || "";
-      expectedTags.forEach((tag) => {
-        if (this.checkTagPresence(text, tag)) {
-          foundTags.push(tag);
-        }
-      });
-    });
-
-    this.setStatus(
-      "odt",
-      foundTags,
-      expectedTags.filter((tag) => !foundTags.includes(tag)),
-    );
-  }
-
-  checkDOCX(xml: Document, expectedTags: string[]) {
-    const pars = xml.querySelectorAll("p,sectPr");
-    const foundTags: string[] = [];
-
-    pars.forEach((par) => {
-      const text = par.textContent || "";
-      expectedTags.forEach((tag) => {
-        if (this.checkTagPresence(text, tag)) {
-          foundTags.push(tag);
-        }
-      });
-    });
-
-    this.setStatus(
-      "docx",
-      foundTags,
-      expectedTags.filter((tag) => !foundTags.includes(tag)),
-    );
-  }
-
-  bind() {
-    const mediaInputSelector = this.dialog.dialogEl.querySelector(
-      ".fw-media-file-input",
-    ) as HTMLInputElement;
-    this.dialog.dialogEl.addEventListener("click", (event) => {
-      const el: { target?: HTMLElement } = {};
-      switch (true) {
-        case findTarget(event, ".fw-media-select-button", el): {
-          event.preventDefault();
-          mediaInputSelector.click();
-          break;
-        }
-      }
-    });
-
-    mediaInputSelector.addEventListener("change", () => {
-      this.showErrors([]);
-      const mediaInput = mediaInputSelector.files![0];
-      if (!mediaInput) {
-        return;
-      }
-      this.checkFile(mediaInput)
-        .then((fileType) => {
-          this.addedFile = mediaInput;
-          this.addedFileType = fileType;
-          this.dialog.dialogEl.querySelector(
-            ".export-template-file",
-          )!.innerHTML = escapeText(mediaInput.name);
+            buttons
         })
-        .catch(() => {
-          this.showErrors([gettext("Selected file not supported.")]);
-        });
-    });
-  }
+        this.dialog.open()
+        this.bind()
+        if (this.template) {
+            this.checkRemoteFile(this.template.fields.template_file)
+        }
+    }
 
-  showHelp() {
-    const helpContent = `
+    showErrors(errors: string[]) {
+        this.dialog.dialogEl.querySelector("ul.fw-errorlist")!.innerHTML =
+            errors.map(error => `<li>${escapeText(error)}</li>`).join("")
+    }
+
+    deleteTemplate() {
+        this.documentTemplateApi
+            .deleteExportTemplate(this.id)
+            .then(() => {
+                const oldTemplateIndex = this.allTemplates.findIndex(
+                    style => style.pk === this.id
+                )
+                if (!(typeof oldTemplateIndex === "undefined")) {
+                    this.allTemplates.splice(oldTemplateIndex, 1)
+                    this.refresh()
+                }
+                this.dialog.close()
+            })
+            .catch(response => {
+                if (response.json) {
+                    response
+                        .json()
+                        .then((json: { errors?: Record<string, string[]> }) => {
+                            if (json.errors) {
+                                const errors: string[] = []
+                                Object.keys(json.errors).forEach(key => {
+                                    json.errors![key].forEach(error =>
+                                        errors.push(`${key}: ${error}`)
+                                    )
+                                })
+                                this.showErrors(errors)
+                            }
+                        })
+                } else {
+                    throw response
+                }
+            })
+    }
+
+    deleteTemplateDialog() {
+        const buttons = [
+            {
+                text: gettext("Delete"),
+                classes: "fw-dark",
+                click: () => {
+                    dialog.close()
+                    this.deleteTemplate()
+                }
+            },
+            {
+                type: "cancel" as const
+            }
+        ]
+        const dialog = new Dialog({
+            id: "confirmdeletion",
+            icon: "exclamation-triangle",
+            title: gettext("Confirm deletion"),
+            body: `<p>${gettext("Do you really want to delete the export template?")}</p>`,
+            height: 180,
+            buttons
+        })
+        dialog.open()
+    }
+
+    checkCurrent() {
+        const errors: string[] = []
+
+        if (!this.addedFile) {
+            errors.push(
+                gettext(
+                    "You need to upload a template file in ODT or DOCX format."
+                )
+            )
+        } else if (
+            this.allTemplates.find(
+                template =>
+                    template.fields.title ===
+                        (this.addedFile as File).name.split(".")[0] &&
+                    template.pk !== this.id
+            )
+        ) {
+            errors.push(
+                gettext(
+                    "Another export file with the same filename exists already."
+                )
+            )
+        }
+        return { errors }
+    }
+
+    save() {
+        const jsonData = {
+            id: this.id,
+            template_id: this.documentTemplateId,
+            added_file_type: this.addedFileType
+        }
+        return this.documentTemplateApi.saveExportTemplate(jsonData, {
+            added_file: this.addedFile as File
+        })
+    }
+
+    checkRemoteFile(url: string) {
+        return get(url)
+            .then(response => response.blob())
+            .then(blob => this.checkFile(blob))
+    }
+
+    checkFile(blob: Blob) {
+        let fileType: "odt" | "docx" | undefined
+        const zip = new JSZip()
+        return zip
+            .loadAsync(blob)
+            .then(zip => {
+                if (zip.files["content.xml"]) {
+                    fileType = "odt"
+                    return zip.files["content.xml"].async("string")
+                } else if (zip.files["word/document.xml"]) {
+                    fileType = "docx"
+                    return zip.files["word/document.xml"].async("string")
+                } else {
+                    throw new Error(gettext("Unknown filetype"))
+                }
+            })
+            .then(string => {
+                const expectedTags = this.documentTemplateValue.content
+                    .map(node => {
+                        switch (node.type) {
+                            case "title":
+                                return "title"
+                            case "richtext_part":
+                            case "table_part":
+                                return `@${(node.attrs as { id: string }).id}`
+                            case "heading_part":
+                            case "contributors_part":
+                            case "tags_part":
+                                return (node.attrs as { id: string }).id
+                            default:
+                                return false
+                        }
+                    })
+                    .concat(["@bibliography", "@copyright", "@licenses"])
+                    .filter((tag): tag is string => !!tag)
+                const parser = new window.DOMParser()
+                const xml = parser.parseFromString(string, "text/xml")
+                if (fileType === "odt") {
+                    this.checkODT(xml, expectedTags)
+                } else {
+                    this.checkDOCX(xml, expectedTags)
+                }
+                return fileType as "odt" | "docx"
+            })
+    }
+
+    setStatus(_fileType: string, foundTags: string[], missingTags: string[]) {
+        this.dialog.dialogEl.querySelector(
+            ".export-template-found-tags"
+        )!.innerHTML = foundTags.join(", ")
+        this.dialog.dialogEl.querySelector(
+            ".export-template-missing-tags"
+        )!.innerHTML = missingTags.join(", ")
+    }
+
+    checkTagPresence(text: string, tag: string) {
+        // Simple replacement: {tag}
+        if (text.includes(`{${tag}}`)) {
+            return true
+        }
+        // Format string: {tag:format=...}
+        if (text.includes(`{${tag}:format=`)) {
+            return true
+        }
+        // Loop block: {BEGIN_tag} or {BEGIN_tag:limit=N}
+        if (
+            text.includes(`{BEGIN_${tag}}`) ||
+            text.includes(`{BEGIN_${tag}:limit=`)
+        ) {
+            return true
+        }
+        // Conditional referencing tag: {IF(tag...)} or {ELIF(tag...)}
+        const ifRegex = new RegExp(`\\{IF\\(${tag}\\.`, "g")
+        const elifRegex = new RegExp(`\\{ELIF\\(${tag}\\.`, "g")
+        if (ifRegex.test(text) || elifRegex.test(text)) {
+            return true
+        }
+        return false
+    }
+
+    checkODT(xml: Document, expectedTags: string[]) {
+        const pars = xml.querySelectorAll("p")
+        const foundTags: string[] = []
+
+        pars.forEach(par => {
+            const text = par.textContent || ""
+            expectedTags.forEach(tag => {
+                if (this.checkTagPresence(text, tag)) {
+                    foundTags.push(tag)
+                }
+            })
+        })
+
+        this.setStatus(
+            "odt",
+            foundTags,
+            expectedTags.filter(tag => !foundTags.includes(tag))
+        )
+    }
+
+    checkDOCX(xml: Document, expectedTags: string[]) {
+        const pars = xml.querySelectorAll("p,sectPr")
+        const foundTags: string[] = []
+
+        pars.forEach(par => {
+            const text = par.textContent || ""
+            expectedTags.forEach(tag => {
+                if (this.checkTagPresence(text, tag)) {
+                    foundTags.push(tag)
+                }
+            })
+        })
+
+        this.setStatus(
+            "docx",
+            foundTags,
+            expectedTags.filter(tag => !foundTags.includes(tag))
+        )
+    }
+
+    bind() {
+        const mediaInputSelector = this.dialog.dialogEl.querySelector(
+            ".fw-media-file-input"
+        ) as HTMLInputElement
+        this.dialog.dialogEl.addEventListener("click", event => {
+            const el: { target?: HTMLElement } = {}
+            switch (true) {
+                case findTarget(event, ".fw-media-select-button", el): {
+                    event.preventDefault()
+                    mediaInputSelector.click()
+                    break
+                }
+            }
+        })
+
+        mediaInputSelector.addEventListener("change", () => {
+            this.showErrors([])
+            const mediaInput = mediaInputSelector.files![0]
+            if (!mediaInput) {
+                return
+            }
+            this.checkFile(mediaInput)
+                .then(fileType => {
+                    this.addedFile = mediaInput
+                    this.addedFileType = fileType
+                    this.dialog.dialogEl.querySelector(
+                        ".export-template-file"
+                    )!.innerHTML = escapeText(mediaInput.name)
+                })
+                .catch(() => {
+                    this.showErrors([gettext("Selected file not supported.")])
+                })
+        })
+    }
+
+    showHelp() {
+        const helpContent = `
             <div class="help-panel">
                 <h3>${gettext("Templating Syntax Help")}</h3>
 
@@ -478,15 +495,15 @@ export class ExportTemplateDialog {
     &lt;/w:tr&gt;
 {ENDIF}
                 </pre>
-            </div>`;
+            </div>`
 
-    const helpDialog = new Dialog({
-      id: "template-help",
-      title: gettext("Templating Help"),
-      body: helpContent,
-      width: 600,
-      height: 500,
-    });
-    helpDialog.open();
-  }
+        const helpDialog = new Dialog({
+            id: "template-help",
+            title: gettext("Templating Help"),
+            body: helpContent,
+            width: 600,
+            height: 500
+        })
+        helpDialog.open()
+    }
 }

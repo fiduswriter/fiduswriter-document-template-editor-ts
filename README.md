@@ -38,12 +38,12 @@ npm install @fiduswriter/document-template-editor
 
 ```ts
 import {
-  DocumentTemplateDesigner,
-  extractTemplate,
-  adjustDocToTemplate,
-  DocumentTemplateExporter,
-  DocumentTemplateImporter,
-} from "@fiduswriter/document-template-editor";
+    DocumentTemplateDesigner,
+    extractTemplate,
+    adjustDocToTemplate,
+    DocumentTemplateExporter,
+    DocumentTemplateImporter
+} from "@fiduswriter/document-template-editor"
 ```
 
 ## Development
