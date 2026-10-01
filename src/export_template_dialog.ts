@@ -53,7 +53,7 @@ export class ExportTemplateDialog {
                 text: gettext("Save"),
                 classes: "fw-dark",
                 click: () => {
-                    const { errors } = this.checkCurrent()
+                    const {errors} = this.checkCurrent()
                     if (errors.length) {
                         this.showErrors(errors)
                         return
@@ -196,7 +196,7 @@ export class ExportTemplateDialog {
                 if (response.json) {
                     response
                         .json()
-                        .then((json: { errors?: Record<string, string[]> }) => {
+                        .then((json: {errors?: Record<string, string[]>}) => {
                             if (json.errors) {
                                 const errors: string[] = []
                                 Object.keys(json.errors).forEach(key => {
@@ -261,7 +261,7 @@ export class ExportTemplateDialog {
                 )
             )
         }
-        return { errors }
+        return {errors}
     }
 
     save() {
@@ -305,11 +305,11 @@ export class ExportTemplateDialog {
                                 return "title"
                             case "richtext_part":
                             case "table_part":
-                                return `@${(node.attrs as { id: string }).id}`
+                                return `@${(node.attrs as {id: string}).id}`
                             case "heading_part":
                             case "contributors_part":
                             case "tags_part":
-                                return (node.attrs as { id: string }).id
+                                return (node.attrs as {id: string}).id
                             default:
                                 return false
                         }
@@ -406,7 +406,7 @@ export class ExportTemplateDialog {
             ".fw-media-file-input"
         ) as HTMLInputElement
         this.dialog.dialogEl.addEventListener("click", event => {
-            const el: { target?: HTMLElement } = {}
+            const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, ".fw-media-select-button", el): {
                     event.preventDefault()

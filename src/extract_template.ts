@@ -1,1 +1,1 @@
-export { extractTemplate } from "@fiduswriter/document/importer/native"
+export {extractTemplate} from "@fiduswriter/document/importer/native"

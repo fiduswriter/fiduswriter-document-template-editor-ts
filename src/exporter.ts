@@ -1,7 +1,7 @@
-import { saveFile } from "@fiduswriter/document/exporter/save"
+import {saveFile} from "@fiduswriter/document/exporter/save"
 
-import { createSlug } from "@fiduswriter/document/exporter/tools/file"
-import { ZipFileCreator } from "fwtoolkit/file/zip"
+import {createSlug} from "@fiduswriter/document/exporter/tools/file"
+import {ZipFileCreator} from "fwtoolkit/file/zip"
 
 import type {
     DocumentTemplateApi,

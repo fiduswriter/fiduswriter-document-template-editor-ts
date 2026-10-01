@@ -13,7 +13,7 @@ declare module "sortablejs" {
 
     export interface SortableOptions {
         group?:
-            string | { name?: string; pull?: boolean | "clone"; put?: boolean }
+            string | {name?: string; pull?: boolean | "clone"; put?: boolean}
         sort?: boolean
         handle?: string
         onAdd?: (event: SortableEvent) => void
@@ -50,8 +50,8 @@ declare module "downloadjs" {
 }
 
 declare module "@fiduswriter/document/state_plugins" {
-    import type { Node } from "prosemirror-model"
-    import type { EditorView, NodeView } from "prosemirror-view"
+    import type {Node} from "prosemirror-model"
+    import type {EditorView, NodeView} from "prosemirror-view"
 
     type GetPos = () => number | undefined
 

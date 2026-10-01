@@ -1,8 +1,8 @@
 import deepEqual from "fast-deep-equal"
 
-import type { FidusNode } from "@fiduswriter/document"
-import { toFullJSON } from "@fiduswriter/document/schema/mini_json"
-import type { Schema } from "prosemirror-model"
+import type {FidusNode} from "@fiduswriter/document"
+import {toFullJSON} from "@fiduswriter/document/schema/mini_json"
+import type {Schema} from "prosemirror-model"
 
 function cleanFootnotes(node: FidusNode, elements: string[], marks: string[]) {
     if (node.attrs?.footnote) {
@@ -246,7 +246,7 @@ export function adjustDocToTemplate(
                             )
                         ) {
                             newNode.content = [
-                                { type: (partAttrs.elements as string[])[0] }
+                                {type: (partAttrs.elements as string[])[0]}
                             ]
                         } else if (
                             !newNode.content &&
@@ -256,7 +256,7 @@ export function adjustDocToTemplate(
                                 {
                                     type: "table",
                                     content: [
-                                        { type: "table_caption" },
+                                        {type: "table_caption"},
                                         {
                                             type: "table_body",
                                             content: [

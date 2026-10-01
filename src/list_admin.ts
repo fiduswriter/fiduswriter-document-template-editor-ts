@@ -7,9 +7,9 @@ import {
     whenReady
 } from "fwtoolkit"
 
-import type { DocumentTemplateApi } from "./types.js"
-import { DocumentTemplateExporter } from "./exporter.js"
-import { DocumentTemplateImporter } from "./importer.js"
+import type {DocumentTemplateApi} from "./types.js"
+import {DocumentTemplateExporter} from "./exporter.js"
+import {DocumentTemplateImporter} from "./importer.js"
 
 export class DocumentTemplateListAdmin {
     settings: Record<string, unknown>
@@ -78,7 +78,7 @@ export class DocumentTemplateListAdmin {
 
     bind() {
         document.body.addEventListener("click", event => {
-            const el: { target?: HTMLElement } = {}
+            const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, "#upload-template", el): {
                     event.preventDefault()
@@ -95,7 +95,7 @@ export class DocumentTemplateListAdmin {
                         ).filter(file => {
                             //TODO: This is an arbitrary size. What should be done with huge import files?
                             if (
-                                (file as File & { length?: number }).length ===
+                                (file as File & {length?: number}).length ===
                                     0 ||
                                 file.size > 104857600
                             ) {

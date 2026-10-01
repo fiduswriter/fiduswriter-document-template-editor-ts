@@ -1,7 +1,7 @@
-import type { FidusNode } from "@fiduswriter/document"
-import { CATS } from "@fiduswriter/document/schema/i18n"
-import { LANGUAGES, PAPER_SIZES } from "@fiduswriter/document/schema/const"
-import { escapeText, gettext } from "fwtoolkit"
+import type {FidusNode} from "@fiduswriter/document"
+import {CATS} from "@fiduswriter/document/schema/i18n"
+import {LANGUAGES, PAPER_SIZES} from "@fiduswriter/document/schema/const"
+import {escapeText, gettext} from "fwtoolkit"
 
 import type {
     ContributorIdType,
@@ -30,8 +30,8 @@ interface TablePartAttrs extends PartAttrs {
 }
 
 const allowedElementsTemplate = (
-    { elements = [] }: { elements?: string[] },
-    { isFootnote = false, isTable = false }: AllowedElementsOptions = {}
+    {elements = []}: {elements?: string[]},
+    {isFootnote = false, isTable = false}: AllowedElementsOptions = {}
 ) =>
     `<div class="label">
     ${gettext("Allowed elements")}
@@ -121,7 +121,7 @@ ${
     </label>`
 }`
 
-const allowedMarksTemplate = ({ marks = [] }: { marks?: string[] }) =>
+const allowedMarksTemplate = ({marks = []}: {marks?: string[]}) =>
     `<div class="label">
     ${gettext("Allowed marks")}
 </div>
@@ -233,7 +233,7 @@ const headingTemplate = ({
             <input type="checkbox" class="elements" value="heading6" ${elements.includes("heading6") ? "checked" : ""}/>
             ${gettext("Heading 6")}
         </label>
-        ${allowedMarksTemplate({ marks })}
+        ${allowedMarksTemplate({marks})}
         <div class="label">${gettext("Language")}
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
@@ -382,8 +382,8 @@ const richtextTemplate = ({
                 <option value="hidden" ${optional === "hidden" ? "selected" : ""}>${gettext("Optional, not shown by default")}</option>
             </select>
         </div>
-        ${allowedElementsTemplate({ elements })}
-        ${allowedMarksTemplate({ marks })}
+        ${allowedElementsTemplate({elements})}
+        ${allowedMarksTemplate({marks})}
         <div class="label">${gettext("Language")}
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
@@ -404,7 +404,7 @@ const richtextTemplate = ({
     </div>
 </div>`
 
-const separatorTemplate = ({ id = "" }: { id?: string }) =>
+const separatorTemplate = ({id = ""}: {id?: string}) =>
     `<div class="doc-part-block" data-type="separator_part">
     <div class="doc-part-header">
         ${gettext("Separator")}
@@ -523,8 +523,8 @@ const tableTemplate = ({
                 <option value="hidden" ${optional === "hidden" ? "selected" : ""}>${gettext("Optional, not shown by default")}</option>
             </select>
         </div>
-        ${allowedElementsTemplate({ elements }, { isTable: true })}
-        ${allowedMarksTemplate({ marks })}
+        ${allowedElementsTemplate({elements}, {isTable: true})}
+        ${allowedMarksTemplate({marks})}
         <div class="label">${gettext("Language")}
             <select class="language">
                 <option value="false" ${language === false ? "selected" : ""}>${gettext("Document language")}</option>
@@ -598,10 +598,10 @@ const footnoteTemplate = ({
     footnote_elements?: string[]
     footnote_marks?: string[]
 }) =>
-    `<div class="doc-part-block attrs">${allowedElementsTemplate({ elements: footnote_elements }, { isFootnote: true })}${allowedMarksTemplate({ marks: footnote_marks })}</div>`
+    `<div class="doc-part-block attrs">${allowedElementsTemplate({elements: footnote_elements}, {isFootnote: true})}${allowedMarksTemplate({marks: footnote_marks})}</div>`
 
 const citationstylesTemplate = (
-    { citationstyles = ["apa"] }: { citationstyles?: string[] },
+    {citationstyles = ["apa"]}: {citationstyles?: string[]},
     allCitationStyles: Record<string, string>
 ) =>
     `<select multiple size=5>
@@ -617,7 +617,7 @@ export const citationstyleTemplate = (
     {
         citationstyle = "apa",
         citationstyles = ["apa"]
-    }: { citationstyle?: string | false; citationstyles?: string[] },
+    }: {citationstyle?: string | false; citationstyles?: string[]},
     allCitationStyles: Record<string, string>
 ) => {
     if (citationstyle === false || !citationstyles.includes(citationstyle)) {
@@ -679,7 +679,7 @@ ${LANGUAGES.map(lang => `<option value="${lang[0]}"${language === lang[0] ? " se
 </select>`
 
 export const bibliographyHeaderTemplate = ({
-    bibliography_header = { zzz: "" }
+    bibliography_header = {zzz: ""}
 }: {
     bibliography_header?: Record<string, string>
 }) => {
@@ -708,7 +708,7 @@ export const idTypesTemplate = ({
 }: {
     id_types?: ContributorIdType[]
 }) => {
-    const types = id_types.length ? id_types : [{ label: "", regex: "" }]
+    const types = id_types.length ? id_types : [{label: "", regex: ""}]
     return `<table class="fw-dialog-table fw-small fw-input-list-wrapper id-types-value">${types
         .map(
             type =>
@@ -799,16 +799,16 @@ ${allLanguages.map(lang => `<option value="${lang}"${code_languages.includes(lan
 const codeCategoriesTemplate = ({
     code_categories = {}
 }: {
-    code_categories?: Record<string, { counter: number; enabled: boolean }>
+    code_categories?: Record<string, {counter: number; enabled: boolean}>
 }) => {
     const allCategories = Object.keys(CATS)
     const defaultCategories = {
-        listing: { counter: 0, enabled: true },
-        example: { counter: 0, enabled: true },
-        snippet: { counter: 0, enabled: false },
-        tutorial: { counter: 0, enabled: false },
-        exercise: { counter: 0, enabled: false },
-        exercise_solution: { counter: 0, enabled: false }
+        listing: {counter: 0, enabled: true},
+        example: {counter: 0, enabled: true},
+        snippet: {counter: 0, enabled: false},
+        tutorial: {counter: 0, enabled: false},
+        exercise: {counter: 0, enabled: false},
+        exercise_solution: {counter: 0, enabled: false}
     }
     const categories = Object.assign({}, defaultCategories, code_categories)
 
@@ -837,7 +837,7 @@ const codeCategoriesTemplate = ({
     </div>`
 }
 
-const templateEditorValueTemplate = ({ content }: { content: FidusNode[] }) =>
+const templateEditorValueTemplate = ({content}: {content: FidusNode[]}) =>
     content
         .map(docPart => {
             const attrs = (docPart.attrs || {}) as PartAttrs
@@ -946,7 +946,7 @@ export const documentDesignerTemplate = ({
                 </td>
                 <td class="to-column">
                     <div class="doc-part-block fixed" data-type="initial">${gettext("Title")}</div>
-                    <div class="to-container">${templateEditorValueTemplate({ content: value.content || [] })}</div>
+                    <div class="to-container">${templateEditorValueTemplate({content: value.content || []})}</div>
                 </td>
                 <td class="trash">
                 </td>
@@ -1049,7 +1049,7 @@ export const documentDesignerTemplate = ({
                     </td>
                     <td>
                         <div class="fw-dialog-buttonset document-styles">
-                                ${documentStylesTemplate({ documentStyles })}
+                                ${documentStylesTemplate({documentStyles})}
                         </div>
                     </td>
                 </tr>
@@ -1059,7 +1059,7 @@ export const documentDesignerTemplate = ({
                     </td>
                     <td>
                         <div class="fw-dialog-buttonset export-templates">
-                                ${exportTemplatesTemplate({ exportTemplates })}
+                                ${exportTemplatesTemplate({exportTemplates})}
                         </div>
                     </td>
                 </tr>`

@@ -2,10 +2,10 @@ import {
     MAX_FW_DOCUMENT_VERSION,
     MIN_FW_DOCUMENT_VERSION
 } from "@fiduswriter/document/importer/native"
-import { FW_DOCUMENT_VERSION } from "@fiduswriter/document/schema/index"
-import { escapeText, gettext } from "fwtoolkit"
+import {FW_DOCUMENT_VERSION} from "@fiduswriter/document/schema/index"
+import {escapeText, gettext} from "fwtoolkit"
 
-import { updateTemplateFile } from "./update.js"
+import {updateTemplateFile} from "./update.js"
 import type {
     BinaryTemplateFile,
     DocumentTemplateApi,
@@ -30,7 +30,7 @@ export class DocumentTemplateImporter {
     ok: boolean
     statusText: string
     docTemplate:
-        { id: number; title: string; added: number; updated: number } | false
+        {id: number; title: string; added: number; updated: number} | false
 
     constructor(file: File, documentTemplateApi: DocumentTemplateApi) {
         this.file = file
@@ -69,7 +69,7 @@ export class DocumentTemplateImporter {
     initZipFileRead() {
         // Extract all the files that can be found in every fidus-file (not images)
         return import("jszip")
-            .then(({ default: JSZip }) => new JSZip())
+            .then(({default: JSZip}) => new JSZip())
             .then(zipfs => zipfs.loadAsync(this.file))
             .then(zipfs => {
                 const filenames: string[] = [],
@@ -150,7 +150,7 @@ export class DocumentTemplateImporter {
                 this.textFiles.find(file => file.filename === "template.json")!
                     .contents
             )
-            const { title, content, exportTemplates, documentStyles } =
+            const {title, content, exportTemplates, documentStyles} =
                 updateTemplateFile(
                     template.attrs.template,
                     template,
@@ -177,7 +177,7 @@ export class DocumentTemplateImporter {
                     },
                     {
                         files: this.otherFiles.map(
-                            ({ filename, content }) =>
+                            ({filename, content}) =>
                                 new File([content], filename)
                         )
                     }

@@ -1,8 +1,8 @@
-import { randomHeadingId } from "@fiduswriter/document/schema/common/index"
-import type { Node, NodeType } from "prosemirror-model"
-import type { EditorView } from "prosemirror-view"
+import {randomHeadingId} from "@fiduswriter/document/schema/common/index"
+import type {Node, NodeType} from "prosemirror-model"
+import type {EditorView} from "prosemirror-view"
 
-import type { FidusNode } from "@fiduswriter/document"
+import type {FidusNode} from "@fiduswriter/document"
 
 // from https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44
 export function debounced(delay: number, fn: (...args: unknown[]) => void) {
@@ -36,7 +36,7 @@ export function addHeadingIds(
     newState: EditorView["state"],
     editors: Array<[HTMLElement, EditorView]>
 ) {
-    const newHeadings: Array<{ pos: number; node: Node }> = [],
+    const newHeadings: Array<{pos: number; node: Node}> = [],
         usedHeadingIds: string[] = []
 
     editors.forEach(([_el, view]) => {
@@ -45,7 +45,7 @@ export function addHeadingIds(
         }
         view.state.doc.descendants(node => {
             if (
-                (node.type as NodeType & { groups: string[] }).groups.includes(
+                (node.type as NodeType & {groups: string[]}).groups.includes(
                     "heading"
                 )
             ) {
@@ -55,7 +55,7 @@ export function addHeadingIds(
     })
     newState.doc.descendants((node, pos) => {
         if (
-            (node.type as NodeType & { groups: string[] }).groups.includes(
+            (node.type as NodeType & {groups: string[]}).groups.includes(
                 "heading"
             )
         ) {
@@ -63,7 +63,7 @@ export function addHeadingIds(
                 node.attrs.id === false ||
                 usedHeadingIds.includes(node.attrs.id as string)
             ) {
-                newHeadings.push({ pos, node })
+                newHeadings.push({pos, node})
             } else {
                 usedHeadingIds.push(node.attrs.id as string)
             }
@@ -82,7 +82,7 @@ export function addHeadingIds(
         newTr.setNodeMarkup(
             newHeading.pos,
             null,
-            Object.assign({}, newHeading.node.attrs, { id })
+            Object.assign({}, newHeading.node.attrs, {id})
         )
     })
     return newTr

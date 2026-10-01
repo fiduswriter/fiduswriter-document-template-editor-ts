@@ -1,4 +1,4 @@
-import { Dialog, escapeText, findTarget, gettext } from "fwtoolkit"
+import {Dialog, escapeText, findTarget, gettext} from "fwtoolkit"
 
 import type {
     DocumentStyle,
@@ -43,13 +43,13 @@ export class DocumentStyleDialog {
                 text: gettext("Save"),
                 classes: "fw-dark",
                 click: () => {
-                    const { title, slug, contents, errors } =
+                    const {title, slug, contents, errors} =
                         this.getCurrentValue()
                     if (errors.length) {
                         this.showErrors(errors)
                         return
                     }
-                    this.save({ title, slug, contents })
+                    this.save({title, slug, contents})
                         .then((json: SaveDocumentStyleResponse) => {
                             const docStyle = json.doc_style[0]
                             const pk = docStyle.pk
@@ -98,7 +98,7 @@ export class DocumentStyleDialog {
                         })
                 }
             },
-            { type: "cancel" as const }
+            {type: "cancel" as const}
         ]
         if (this.allStyles.length > 1 && this.id) {
             buttons.unshift({
@@ -182,7 +182,7 @@ export class DocumentStyleDialog {
                 if (response.json) {
                     response
                         .json()
-                        .then((json: { errors?: Record<string, string[]> }) => {
+                        .then((json: {errors?: Record<string, string[]>}) => {
                             if (json.errors) {
                                 const errors: string[] = []
                                 Object.keys(json.errors).forEach(key => {
@@ -256,7 +256,7 @@ export class DocumentStyleDialog {
         ) {
             errors.push(gettext("The slug has to be unique."))
         }
-        return { title, slug, contents, errors }
+        return {title, slug, contents, errors}
     }
 
     save({
@@ -288,7 +288,7 @@ export class DocumentStyleDialog {
             ".fw-media-file-input"
         ) as HTMLInputElement
         this.dialog.dialogEl.addEventListener("click", event => {
-            const el: { target?: HTMLElement } = {}
+            const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, ".delete-document-style-file", el): {
                     event.preventDefault()

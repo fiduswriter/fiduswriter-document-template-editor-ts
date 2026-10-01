@@ -1,4 +1,4 @@
-import type { FidusNode, JSONValue } from "@fiduswriter/document"
+import type {FidusNode, JSONValue} from "@fiduswriter/document"
 
 /** Map of CSL citation style identifiers to human-readable titles. */
 export type CitationStyleMap = Record<string, string>
@@ -162,14 +162,14 @@ export interface SaveExportTemplateResponse {
 /** API connector for document-template-editor server operations. */
 export interface DocumentTemplateApi {
     list(): Promise<Record<string, unknown>>
-    get(data: { id: number; token?: string }): Promise<Record<string, unknown>>
+    get(data: {id: number; token?: string}): Promise<Record<string, unknown>>
     save(data: Record<string, unknown>): Promise<unknown>
-    delete(data: { id: number }): Promise<Record<string, unknown>>
+    delete(data: {id: number}): Promise<Record<string, unknown>>
     create(
         data: Record<string, unknown>,
         files?: Record<string, unknown>
     ): Promise<unknown>
-    copy(data: { id: number; title: string }): Promise<Record<string, unknown>>
+    copy(data: {id: number; title: string}): Promise<Record<string, unknown>>
     getTemplate(id: number, token?: string): Promise<TemplateExportResponse>
     createTemplate(
         data: Record<string, unknown>,
@@ -189,7 +189,7 @@ export interface DocumentTemplateApi {
         data: Record<string, unknown>,
         files?: Record<string, unknown>
     ): Promise<Record<string, unknown>>
-    getTemplateExtras(data: { id: number }): Promise<TemplateExtras>
+    getTemplateExtras(data: {id: number}): Promise<TemplateExtras>
 }
 
 /** Subset of the host app object used by document-template-editor code. */

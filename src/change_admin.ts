@@ -1,4 +1,4 @@
-import { CSL } from "@fiduswriter/document/citeproc-plus"
+import {CSL} from "@fiduswriter/document/citeproc-plus"
 import {
     ensureCSS,
     escapeText,
@@ -8,7 +8,7 @@ import {
     whenReady
 } from "fwtoolkit"
 
-import { DocumentTemplateDesigner } from "./designer.js"
+import {DocumentTemplateDesigner} from "./designer.js"
 import type {
     DocumentStyle,
     DocumentTemplateApi,
@@ -68,7 +68,7 @@ export class DocumentTemplateAdmin {
         if (this.id) {
             initialTasks.push(
                 this.documentTemplateApi
-                    .getTemplateExtras({ id: this.id })
+                    .getTemplateExtras({id: this.id})
                     .then(json => (this.templateExtras = json))
             )
         }
@@ -153,7 +153,7 @@ export class DocumentTemplateAdmin {
     }
 
     setCurrentValue() {
-        const { valid, value, errors, import_id, title } = (
+        const {valid, value, errors, import_id, title} = (
             this.templateDesigner as DocumentTemplateDesigner
         ).getCurrentValue()
         ;(this.contentTextarea as HTMLTextAreaElement).value =
@@ -173,7 +173,7 @@ export class DocumentTemplateAdmin {
 
     bind() {
         document.body.addEventListener("click", event => {
-            const el: { target?: HTMLElement } = {}
+            const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, "#toggle-editor", el):
                     event.preventDefault()

@@ -1,25 +1,25 @@
-import { baseKeymap } from "prosemirror-commands"
-import { buildInputRules, buildKeymap } from "prosemirror-example-setup"
-import { gapCursor } from "prosemirror-gapcursor"
-import { history } from "prosemirror-history"
-import { keymap } from "prosemirror-keymap"
-import { menuBar, type MenuElement } from "prosemirror-menu"
-import type { Node, Schema } from "prosemirror-model"
-import { EditorState, Plugin } from "prosemirror-state"
-import { tableEditing } from "prosemirror-tables"
-import { EditorView } from "prosemirror-view"
+import {baseKeymap} from "prosemirror-commands"
+import {buildInputRules, buildKeymap} from "prosemirror-example-setup"
+import {gapCursor} from "prosemirror-gapcursor"
+import {history} from "prosemirror-history"
+import {keymap} from "prosemirror-keymap"
+import {menuBar, type MenuElement} from "prosemirror-menu"
+import type {Node, Schema} from "prosemirror-model"
+import {EditorState, Plugin} from "prosemirror-state"
+import {tableEditing} from "prosemirror-tables"
+import {EditorView} from "prosemirror-view"
 import sortable from "sortablejs"
 
-import { docSchema } from "@fiduswriter/document/schema/document/index"
-import { toFullJSON, toMiniJSON } from "@fiduswriter/document/schema/mini_json"
+import {docSchema} from "@fiduswriter/document/schema/document/index"
+import {toFullJSON, toMiniJSON} from "@fiduswriter/document/schema/mini_json"
 import {
     ContributorsPartView,
     TagsPartView
 } from "@fiduswriter/document/state_plugins"
-import { ensureCSS, findTarget, gettext, staticUrl } from "fwtoolkit"
+import {ensureCSS, findTarget, gettext, staticUrl} from "fwtoolkit"
 
-import { DocumentStyleDialog } from "./document_style_dialog.js"
-import { ExportTemplateDialog } from "./export_template_dialog.js"
+import {DocumentStyleDialog} from "./document_style_dialog.js"
+import {ExportTemplateDialog} from "./export_template_dialog.js"
 import {
     contributorsPartSchema,
     headingMenuContent,
@@ -41,7 +41,7 @@ import {
     idTypesTemplate,
     languageTemplate
 } from "./templates.js"
-import { addHeadingIds, debounced, noTrack } from "./tools.js"
+import {addHeadingIds, debounced, noTrack} from "./tools.js"
 import type {
     CitationStyleMap,
     DocumentStyle,
@@ -50,7 +50,7 @@ import type {
     ExportTemplate,
     TemplateCurrentValue
 } from "./types.js"
-import type { FidusNode } from "@fiduswriter/document"
+import type {FidusNode} from "@fiduswriter/document"
 
 /** Options accepted by the {@link DocumentTemplateDesigner} constructor. */
 export interface DesignerOptions {
@@ -76,7 +76,7 @@ export class DocumentTemplateDesigner {
     manageStylesAndTemplates: boolean
 
     editors: Array<[HTMLElement, EditorView]>
-    listeners: { onScroll: () => void }
+    listeners: {onScroll: () => void}
 
     constructor(
         id: number,
@@ -151,7 +151,7 @@ export class DocumentTemplateDesigner {
             valid = false
             errors.empty_template_title = gettext("The template needs a title.")
             titleEl.classList.add("error-element")
-            titleEl.scrollIntoView({ block: "center", behavior: "smooth" })
+            titleEl.scrollIntoView({block: "center", behavior: "smooth"})
         }
         const importIdEl = this.dom.querySelector(
             "input.import-id"
@@ -161,13 +161,13 @@ export class DocumentTemplateDesigner {
             valid = false
             errors.empty_import_id = gettext("The template needs an ID.")
             importIdEl.classList.add("error-element")
-            importIdEl.scrollIntoView({ block: "center", behavior: "smooth" })
+            importIdEl.scrollIntoView({block: "center", behavior: "smooth"})
         }
         if (/\s/.test(importId)) {
             valid = false
             errors.no_spaces = gettext("The template ID cannot contain spaces.")
             importIdEl.classList.add("error-element")
-            importIdEl.scrollIntoView({ block: "center", behavior: "smooth" })
+            importIdEl.scrollIntoView({block: "center", behavior: "smooth"})
         }
         // Clear any previous regex error styling
         this.dom.querySelectorAll(".id-type-regex").forEach(el => {
@@ -178,7 +178,7 @@ export class DocumentTemplateDesigner {
 
         this.value = {
             type: "doc",
-            content: [{ type: "title" }].concat(
+            content: [{type: "title"}].concat(
                 Array.from(
                     this.dom.querySelectorAll(
                         ".to-container .doc-part-block:not(.fixed)"
@@ -221,8 +221,8 @@ export class DocumentTemplateDesigner {
                                   ) as HTMLOptionElement
                               ).value
                             : false,
-                        attrs: FidusNode["attrs"] = { id, title },
-                        node: FidusNode = { type, attrs }
+                        attrs: FidusNode["attrs"] = {id, title},
+                        node: FidusNode = {type, attrs}
                     if (help) {
                         attrs.help = help
                     }
@@ -261,7 +261,7 @@ export class DocumentTemplateDesigner {
                             }
                             if (!node.content) {
                                 node.content = [
-                                    { type: (attrs.elements as string[])[0] }
+                                    {type: (attrs.elements as string[])[0]}
                                 ]
                             }
                             const metadata = (
@@ -302,7 +302,7 @@ export class DocumentTemplateDesigner {
                                     {
                                         type: "table",
                                         content: [
-                                            { type: "table_caption" },
+                                            {type: "table_caption"},
                                             {
                                                 type: "table_body",
                                                 content: [
@@ -446,7 +446,7 @@ export class DocumentTemplateDesigner {
                     this.dom.querySelectorAll(
                         ".code-categories-value .code-category:checked"
                     )
-                ).reduce<Record<string, { counter: number; enabled: boolean }>>(
+                ).reduce<Record<string, {counter: number; enabled: boolean}>>(
                     (obj, el) => {
                         obj[(el as HTMLInputElement).value] = {
                             counter: 0,
@@ -473,7 +473,7 @@ export class DocumentTemplateDesigner {
                 }, {}),
                 id_types: Array.from(
                     this.dom.querySelectorAll(".id-types-value tr")
-                ).reduce<Array<{ label: string; regex?: string }>>(
+                ).reduce<Array<{label: string; regex?: string}>>(
                     (types, trEl) => {
                         const labelInput = (trEl as HTMLElement).querySelector(
                             ".id-type-label"
@@ -501,7 +501,7 @@ export class DocumentTemplateDesigner {
                                     return types
                                 }
                             }
-                            types.push({ label, regex })
+                            types.push({label, regex})
                         }
                         return types
                     },
@@ -689,7 +689,7 @@ export class DocumentTemplateDesigner {
         if (addedHeadings) {
             state = state.apply(addedHeadings)
         }
-        const initialView = new EditorView(initialEl, { state })
+        const initialView = new EditorView(initialEl, {state})
         this.editors.push([initialEl, initialView])
     }
 
@@ -754,7 +754,7 @@ export class DocumentTemplateDesigner {
         })
 
         this.dom.addEventListener("click", event => {
-            const el: { target?: HTMLElement } = {}
+            const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, ".doc-part-block .configure", el):
                     event.preventDefault()
@@ -775,7 +775,7 @@ export class DocumentTemplateDesigner {
                         bibliography_header: Object.assign(
                             {},
                             this.value.attrs.bibliography_header,
-                            { zzz: "" }
+                            {zzz: ""}
                         ) // 'zzz' so that the entry is added at the of the list
                     })
                     break
@@ -795,7 +795,7 @@ export class DocumentTemplateDesigner {
                     this.dom.querySelector(".id-types-value")!.innerHTML =
                         idTypesTemplate({
                             id_types: (this.value.attrs.id_types || []).concat([
-                                { label: "", regex: "" }
+                                {label: "", regex: ""}
                             ])
                         })
                     break
@@ -837,7 +837,7 @@ export class DocumentTemplateDesigner {
                     const template = this.exportTemplates.find(
                         template => template.pk === id
                     )
-                    const { value, valid } = this.getCurrentValue()
+                    const {value, valid} = this.getCurrentValue()
                     if (valid) {
                         const dialog = new ExportTemplateDialog(
                             id,

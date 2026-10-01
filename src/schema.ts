@@ -1,13 +1,13 @@
-import { buildMenuItems } from "prosemirror-example-setup"
+import {buildMenuItems} from "prosemirror-example-setup"
 import {
     Dropdown,
     MenuItem,
     blockTypeItem,
     type MenuElement
 } from "prosemirror-menu"
-import { DOMSerializer, Schema, type Node } from "prosemirror-model"
-import { schema } from "prosemirror-schema-basic"
-import type { EditorState, Transaction } from "prosemirror-state"
+import {DOMSerializer, Schema, type Node} from "prosemirror-model"
+import {schema} from "prosemirror-schema-basic"
+import type {EditorState, Transaction} from "prosemirror-state"
 import {
     addColumnAfter,
     addColumnBefore,
@@ -22,8 +22,8 @@ import {
     toggleHeaderRow
 } from "prosemirror-tables"
 
-import { docSchema } from "@fiduswriter/document/schema/document/index"
-import { gettext } from "fwtoolkit"
+import {docSchema} from "@fiduswriter/document/schema/document/index"
+import {gettext} from "fwtoolkit"
 
 const doc = {
     content: "block+",
@@ -32,7 +32,7 @@ const doc = {
     }
 }
 
-import type { Command } from "prosemirror-state"
+import type {Command} from "prosemirror-state"
 
 // from https://github.com/ProseMirror/prosemirror-tables/blob/master/src/util.js
 const findTable = (state: EditorState) => {
@@ -55,7 +55,7 @@ export const helpSchema: Schema = new Schema({
     marks: schema.spec.marks.remove("code").update("link", {
         attrs: {
             href: {},
-            title: { default: null }
+            title: {default: null}
         },
         inclusive: false,
         parseDOM: [
@@ -70,7 +70,7 @@ export const helpSchema: Schema = new Schema({
             }
         ],
         toDOM(node) {
-            return ["a", Object.assign({ target: "_blank" }, node.attrs), 0]
+            return ["a", Object.assign({target: "_blank"}, node.attrs), 0]
         }
     })
 })
@@ -81,14 +81,14 @@ helpMenuContent.splice(1, 1) // full menu minus drop downs
 const helpSerializer = DOMSerializer.fromSchema(helpSchema)
 
 export const serializeHelp = (content: unknown[]) => {
-    const doc = { type: "doc", content },
+    const doc = {type: "doc", content},
         pmNode = helpSchema.nodeFromJSON(doc),
         dom = helpSerializer.serializeNode(pmNode) as HTMLElement
     return dom.innerHTML
 }
 
 export const richtextPartSchema: Schema = new Schema({
-    nodes: docSchema.spec.nodes.update("doc", { content: "richtext_part" }),
+    nodes: docSchema.spec.nodes.update("doc", {content: "richtext_part"}),
     marks: docSchema.spec.marks
 })
 
@@ -96,7 +96,7 @@ export const richtextMenuContent = buildMenuItems(richtextPartSchema).fullMenu
 for (let i = 1; i <= 6; i++) {
     const type = richtextPartSchema.nodes[`heading${i}`]!
     ;(
-        richtextMenuContent[1][1] as Dropdown & { content: MenuElement[] }
+        richtextMenuContent[1][1] as Dropdown & {content: MenuElement[]}
     ).content.push(
         blockTypeItem(type, {
             title: gettext("Change to heading ") + i,
@@ -107,7 +107,7 @@ for (let i = 1; i <= 6; i++) {
 
 const type = richtextPartSchema.nodes["table"]!
 ;(
-    richtextMenuContent[1][0] as Dropdown & { content: MenuElement[] }
+    richtextMenuContent[1][0] as Dropdown & {content: MenuElement[]}
 ).content.push(
     blockTypeItem(type, {
         title: gettext("Insert Table"),
@@ -119,7 +119,7 @@ const type = richtextPartSchema.nodes["table"]!
             const table = {
                 type: "table",
                 content: [
-                    { type: "table_caption" },
+                    {type: "table_caption"},
                     {
                         type: "table_body",
                         content: [
@@ -128,7 +128,7 @@ const type = richtextPartSchema.nodes["table"]!
                                 content: [
                                     {
                                         type: "table_cell",
-                                        content: [{ type: "paragraph" }]
+                                        content: [{type: "paragraph"}]
                                     }
                                 ]
                             }
@@ -147,11 +147,11 @@ const type = richtextPartSchema.nodes["table"]!
 
 export const tablePartSchema: Schema = new Schema({
     nodes: docSchema.spec.nodes
-        .update("doc", { content: "table_part" })
+        .update("doc", {content: "table_part"})
         .update("table_row", {
             content: "(table_cell | table_header)+",
             tableRole: "row",
-            parseDOM: [{ tag: "tr" }],
+            parseDOM: [{tag: "tr"}],
             toDOM() {
                 return ["tr", 0]
             }
@@ -163,7 +163,7 @@ export const tableMenuContent = buildMenuItems(tablePartSchema).fullMenu
 for (let i = 1; i <= 6; i++) {
     const type = tablePartSchema.nodes[`heading${i}`]!
     ;(
-        tableMenuContent[1][1] as Dropdown & { content: MenuElement[] }
+        tableMenuContent[1][1] as Dropdown & {content: MenuElement[]}
     ).content.push(
         blockTypeItem(type, {
             title: gettext("Change to heading ") + i,
@@ -172,7 +172,7 @@ for (let i = 1; i <= 6; i++) {
     )
 }
 function tableMenuItem(label: string, cmd: Command) {
-    return new MenuItem({ label, select: cmd, run: cmd })
+    return new MenuItem({label, select: cmd, run: cmd})
 }
 const tableMenu = [
     tableMenuItem(gettext("Insert column after"), addColumnAfter),
@@ -207,16 +207,16 @@ const tableMenu = [
     })
 ]
 tableMenuContent.splice(2, 0, [
-    new Dropdown(tableMenu, { label: gettext("Table") })
+    new Dropdown(tableMenu, {label: gettext("Table")})
 ])
 
 richtextMenuContent.splice(2, 0, [
-    new Dropdown(tableMenu, { label: gettext("Table") })
+    new Dropdown(tableMenu, {label: gettext("Table")})
 ])
 
 export const headingPartSchema: Schema = new Schema({
     nodes: docSchema.spec.nodes
-        .update("doc", { content: "heading_part" })
+        .update("doc", {content: "heading_part"})
         .remove("horizontal_rule")
         .remove("paragraph")
         .remove("code_block"),
@@ -227,7 +227,7 @@ export const headingMenuContent = buildMenuItems(headingPartSchema).fullMenu
 for (let i = 1; i <= 6; i++) {
     const type = headingPartSchema.nodes[`heading${i}`]!
     ;(
-        headingMenuContent[1][1] as Dropdown & { content: MenuElement[] }
+        headingMenuContent[1][1] as Dropdown & {content: MenuElement[]}
     ).content.push(
         blockTypeItem(type, {
             title: gettext("Change to heading ") + i,
@@ -238,7 +238,7 @@ for (let i = 1; i <= 6; i++) {
 
 export const tagsPartSchema: Schema = new Schema({
     nodes: {
-        doc: { content: "tags_part" },
+        doc: {content: "tags_part"},
         tags_part: docSchema.spec.nodes.get("tags_part")!,
         tag: docSchema.spec.nodes.get("tag")!,
         text: docSchema.spec.nodes.get("text")!
@@ -248,7 +248,7 @@ export const tagsPartSchema: Schema = new Schema({
 
 export const contributorsPartSchema: Schema = new Schema({
     nodes: {
-        doc: { content: "contributors_part" },
+        doc: {content: "contributors_part"},
         contributors_part: docSchema.spec.nodes.get("contributors_part")!,
         contributor: docSchema.spec.nodes.get("contributor")!,
         text: docSchema.spec.nodes.get("text")!
