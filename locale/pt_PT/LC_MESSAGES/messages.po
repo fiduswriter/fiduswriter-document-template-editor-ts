@@ -23,6 +23,9 @@ msgstr "(ponto e vírgula+espaço), "
 msgid "A file with the same name exists already."
 msgstr "Já existe um arquivo com o mesmo nome."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "Um slug só pode conter letras, números, hifens e sublinhados.\""
+
 msgid "Abstract"
 msgstr "Resumo"
 
@@ -371,6 +374,9 @@ msgstr "Nenhum"
 msgid "Obligatory field"
 msgstr "Campo obrigatório"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "Uma ou mais expressões regulares de ID de contribuidor são inválidas.\""
+
 msgid "Optional"
 msgstr "Opcional"
 
@@ -481,6 +487,17 @@ msgstr "O modelo precisa de um título."
 
 msgid "The template needs an ID."
 msgstr "O modelo precisa de um ID."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "O arquivo carregado não parece ser um arquivo Fidus Writer.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr ""
+"\"O arquivo carregado não parece ser um arquivo de modelo do Fidus Writer.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr "O arquivo enviado não parece ser da versão usada neste servidor: "
 
 msgid "Title"
 msgstr "Título"

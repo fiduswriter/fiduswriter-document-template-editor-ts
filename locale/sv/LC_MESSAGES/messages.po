@@ -23,6 +23,11 @@ msgstr "(semikolon+mellanslag), "
 msgid "A file with the same name exists already."
 msgstr "En fil med samma namn finns redan."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr ""
+"\"En snigel kan bara innehålla bokstäver, siffror, bindestreck och "
+"\"understreck.\""
+
 msgid "Abstract"
 msgstr "Abstrakt"
 
@@ -371,6 +376,9 @@ msgstr "Ingen"
 msgid "Obligatory field"
 msgstr "Obligatoriskt fält"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "En eller flera regexes för bidragsgivare-ID är ogiltiga.\""
+
 msgid "Optional"
 msgstr "Frivillig"
 
@@ -481,6 +489,18 @@ msgstr "Mallen behöver en titel."
 
 msgid "The template needs an ID."
 msgstr "Mallen behöver ett ID."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "Den uppladdade filen verkar inte vara en Fidus Writer-fil.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "Den uppladdade filen verkar inte vara en Fidus Writer-mallfil.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"Den uppladdade filen verkar inte vara av den version som används på denna "
+"server: "
 
 msgid "Title"
 msgstr "Titel"

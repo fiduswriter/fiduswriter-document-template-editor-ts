@@ -23,6 +23,9 @@ msgstr "(średnik+spacja), "
 msgid "A file with the same name exists already."
 msgstr "Plik o tej samej nazwie już istnieje."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "Ślimak może zawierać tylko litery, cyfry, łączniki i podkreślenia.\""
+
 msgid "Abstract"
 msgstr "Streszczenie"
 
@@ -371,6 +374,11 @@ msgstr "Nic"
 msgid "Obligatory field"
 msgstr "Pole obowiązkowe"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr ""
+"\"Co najmniej jedno wyrażenie regularne identyfikatora współautora jest "
+"\"nieprawidłowe.\""
+
 msgid "Optional"
 msgstr "Fakultatywny"
 
@@ -481,6 +489,18 @@ msgstr "Szablon wymaga tytułu."
 
 msgid "The template needs an ID."
 msgstr "Szablon wymaga identyfikatora."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "Przesłany plik nie wygląda na plik Fidus Writer.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "Przesłany plik nie wygląda na plik szablonu programu Fidus Writer.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"Wygląda na to, że przesłany plik nie jest w wersji używanej na tym serwerze:"
+" "
 
 msgid "Title"
 msgstr "Tytuł"

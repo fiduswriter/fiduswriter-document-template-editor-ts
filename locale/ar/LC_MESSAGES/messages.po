@@ -23,6 +23,9 @@ msgstr "(فاصلة منقوطة + مسافة)، "
 msgid "A file with the same name exists already."
 msgstr "يوجد ملف بنفس الاسم بالفعل."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "يمكن أن يحتوي البزاق فقط على أحرف وأرقام وواصلات وشرطات سفلية.\""
+
 msgid "Abstract"
 msgstr "خلاصة"
 
@@ -371,6 +374,9 @@ msgstr "لا أحد"
 msgid "Obligatory field"
 msgstr "المجال الإجباري"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "واحد أو أكثر من التعابير التعبيرية لمعرف المساهم غير صالحة.\""
+
 msgid "Optional"
 msgstr "خياري"
 
@@ -481,6 +487,17 @@ msgstr "القالب يحتاج إلى عنوان."
 
 msgid "The template needs an ID."
 msgstr "القالب يحتاج إلى معرف."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "لا يبدو أن الملف الذي تم تحميله هو ملف Fidus Writer.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "لا يبدو أن الملف الذي تم تحميله هو ملف قالب Fidus Writer.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"لا يبدو أن الملف الذي تم تحميله هو من الإصدار المستخدم على هذا الخادم: "
 
 msgid "Title"
 msgstr "عنوان"

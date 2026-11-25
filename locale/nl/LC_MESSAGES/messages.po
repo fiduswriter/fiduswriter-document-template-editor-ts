@@ -23,6 +23,11 @@ msgstr "(puntkomma+spatie), "
 msgid "A file with the same name exists already."
 msgstr "Er bestaat al een bestand met dezelfde naam."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr ""
+"\"Een slug mag alleen letters, cijfers, koppeltekens en onderstrepingstekens"
+" \"bevatten.\""
+
 msgid "Abstract"
 msgstr "Abstract"
 
@@ -371,6 +376,9 @@ msgstr "Geen"
 msgid "Obligatory field"
 msgstr "Verplicht veld"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "Een of meer regexes voor bijdrager-ID's zijn ongeldig.\""
+
 msgid "Optional"
 msgstr "Optioneel"
 
@@ -481,6 +489,19 @@ msgstr "De sjabloon heeft een titel nodig."
 
 msgid "The template needs an ID."
 msgstr "De sjabloon heeft een ID nodig."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "Het geüploade bestand lijkt geen Fidus Writer-bestand te zijn.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr ""
+"\"Het geüploade bestand lijkt geen Fidus Writer-sjabloonbestand te zijn.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"Het geüploade bestand lijkt niet de versie te zijn die op deze server wordt "
+"gebruikt: "
 
 msgid "Title"
 msgstr "Titel"

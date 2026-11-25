@@ -23,6 +23,9 @@ msgstr "(세미콜론+공백), "
 msgid "A file with the same name exists already."
 msgstr "같은 이름의 파일이 이미 존재합니다."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "슬러그에는 문자, 숫자, 하이픈 및 밑줄만 포함될 수 있습니다.\""
+
 msgid "Abstract"
 msgstr "초록"
 
@@ -371,6 +374,9 @@ msgstr "없음"
 msgid "Obligatory field"
 msgstr "필수항목"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "하나 이상의 기여자 ID 정규 표현식이 잘못되었습니다.\""
+
 msgid "Optional"
 msgstr "선택 과목"
 
@@ -481,6 +487,16 @@ msgstr "템플릿에는 제목이 필요합니다."
 
 msgid "The template needs an ID."
 msgstr "템플릿에는 ID가 필요합니다."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "업로드된 파일이 Fidus Writer 파일이 아닌 것 같습니다.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "업로드된 파일이 Fidus Writer 템플릿 파일이 아닌 것 같습니다.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr "업로드된 파일이 이 서버에서 사용되는 버전이 아닌 것 같습니다. "
 
 msgid "Title"
 msgstr "제목"

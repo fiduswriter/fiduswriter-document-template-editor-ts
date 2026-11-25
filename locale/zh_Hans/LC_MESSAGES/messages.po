@@ -23,6 +23,9 @@ msgstr "（分号+空格）， "
 msgid "A file with the same name exists already."
 msgstr "已存在同名文件。"
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "slug 只能包含字母、数字、连字符和下划线。\""
+
 msgid "Abstract"
 msgstr "抽象的"
 
@@ -371,6 +374,9 @@ msgstr "没有任何"
 msgid "Obligatory field"
 msgstr "必填字段"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "一个或多个贡献者 ID 正则表达式无效。\""
+
 msgid "Optional"
 msgstr "选修的"
 
@@ -481,6 +487,16 @@ msgstr "模板需要一个标题。"
 
 msgid "The template needs an ID."
 msgstr "该模板需要一个 ID。"
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "上传的文件似乎不是 Fidus Writer 文件。\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "上传的文件似乎不是 Fidus Writer 模板文件。\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr "上传的文件似乎不是该服务器上使用的版本： "
 
 msgid "Title"
 msgstr "标题"

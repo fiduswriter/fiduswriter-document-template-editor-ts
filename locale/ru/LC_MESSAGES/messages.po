@@ -23,6 +23,11 @@ msgstr "(точка с запятой+пробел), "
 msgid "A file with the same name exists already."
 msgstr "Файл с таким именем уже существует."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr ""
+"\"Слаг может содержать только буквы, цифры, дефисы и символы "
+"подчеркивания.\""
+
 msgid "Abstract"
 msgstr "Абстрактный"
 
@@ -371,6 +376,11 @@ msgstr "Никто"
 msgid "Obligatory field"
 msgstr "Обязательное поле"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr ""
+"\"Одно или несколько регулярных выражений идентификатора участника "
+"\"недействительны.\""
+
 msgid "Optional"
 msgstr "Необязательный"
 
@@ -481,6 +491,17 @@ msgstr "Шаблону нужен заголовок."
 
 msgid "The template needs an ID."
 msgstr "Шаблону нужен идентификатор."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "Загруженный файл не является файлом Fidus Writer.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "Загруженный файл не является файлом шаблона Fidus Writer.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"Загруженный файл не соответствует версии, используемой на этом сервере: "
 
 msgid "Title"
 msgstr "Заголовок"

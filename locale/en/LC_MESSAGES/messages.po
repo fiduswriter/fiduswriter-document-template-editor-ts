@@ -23,6 +23,9 @@ msgstr "(semicolon+space), "
 msgid "A file with the same name exists already."
 msgstr "A file with the same name exists already."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr "A slug can only contain letters, numbers, hyphens and underscores.\""
+
 msgid "Abstract"
 msgstr "Abstract"
 
@@ -371,6 +374,9 @@ msgstr "None"
 msgid "Obligatory field"
 msgstr "Obligatory field"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr "One or more contributor ID regexes are invalid.\""
+
 msgid "Optional"
 msgstr "Optional"
 
@@ -481,6 +487,17 @@ msgstr "The template needs a title."
 
 msgid "The template needs an ID."
 msgstr "The template needs an ID."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "The uploaded file does not appear to be a Fidus Writer file.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr "The uploaded file does not appear to be a Fidus Writer Template file.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"The uploaded file does not appear to be of the version used on this server: "
 
 msgid "Title"
 msgstr "Title"

@@ -23,6 +23,11 @@ msgstr "(Semikolon+Leerzeichen), "
 msgid "A file with the same name exists already."
 msgstr "Eine gleichnamige Datei existiert bereits."
 
+msgid "A slug can only contain letters, numbers, hyphens and underscores."
+msgstr ""
+"\"Ein Slug kann nur Buchstaben, Zahlen, Bindestriche und Unterstriche "
+"\"enthalten.\""
+
 msgid "Abstract"
 msgstr "Zusammenfassung"
 
@@ -372,6 +377,10 @@ msgstr "Keine"
 msgid "Obligatory field"
 msgstr "Pflichtfeld"
 
+msgid "One or more contributor ID regexes are invalid."
+msgstr ""
+"\"Eine oder mehrere reguläre Ausdrücke der Mitwirkenden-ID sind ungültig.\""
+
 msgid "Optional"
 msgstr "Wahlweise"
 
@@ -482,6 +491,20 @@ msgstr "Die Vorlage benötigt einen Titel."
 
 msgid "The template needs an ID."
 msgstr "Die Vorlage benötigt eine ID."
+
+msgid "The uploaded file does not appear to be a Fidus Writer file."
+msgstr "Die hochgeladene Datei scheint keine Fidus Writer-Datei zu sein.\""
+
+msgid "The uploaded file does not appear to be a Fidus Writer Template file."
+msgstr ""
+"\"Die hochgeladene Datei scheint keine Fidus Writer-Dokumentvorlage zu "
+"sein.\""
+
+msgid ""
+"The uploaded file does not appear to be of the version used on this server: "
+msgstr ""
+"Die hochgeladene Datei scheint nicht der auf diesem Server verwendeten "
+"Version zu entsprechen: "
 
 msgid "Title"
 msgstr "Titel"
